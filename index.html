@@ -438,48 +438,48 @@
 <main id="tutos" class="page-view">
         <h1 class="section-title">Tutoriels</h1>
 
-        <div class="tutos-manifesto">
-            <div class="manifesto-header">
-                <span class="manifesto-icon">⚠️</span>
-                <h3>Note de l'Éditeur</h3>
+        <div class="tutos-manifesto" style="border: 1px solid var(--border); padding: 3rem; margin-bottom: 4rem; background: #050505;">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <span style="font-size: 1.5rem;">⚠️</span>
+                <h3 style="font-size: 1.5rem; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;">Note de l'Éditeur</h3>
             </div>
-            <p>Cette section regroupe une sélection de vidéos tutoriels issues de YouTube, choisies pour leur qualité et leur clarté. Tous les contenus sont classés par thématique et niveau, afin de t’aider à progresser étape par étape, quel que soit ton profil.</p>
+            <p style="color: var(--text-muted); line-height: 1.6;">Cette section regroupe une sélection de vidéos tutoriels issues de YouTube, choisies pour leur qualité et leur clarté. Tous les contenus sont classés par thématique et niveau, afin de t’aider à progresser étape par étape, quel que soit ton profil.</p>
             
             <div style="margin: 2rem 0;">
-                <p style="text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 1rem;">Les Catégories :</p>
-                <ul class="manifesto-list">
-                    <li><strong>Débutant :</strong> Les bases du parkour pour apprendre les fondamentaux (rolls, sauts, équilibre, etc.) en toute sécurité.</li>
-                    <li><strong>Intermédiaire :</strong> Des techniques plus avancées et des enchaînements pour gagner en fluidité et en maîtrise.</li>
-                    <li><strong>Confirmé :</strong> Des mouvements complexes, des combinaisons techniques et du travail de précision pour les traceurs expérimentés.</li>
-                    <li><strong>Freerun :</strong> Axé sur l’aspect acrobatique et esthétique du mouvement (flips, twists, combos stylisés).</li>
-                    <li><strong>Freerun Variant :</strong> Variantes créatives, mouvements hybrides et enchaînements personnels inspirés du freerun.</li>
-                    <li><strong>Sécurité :</strong> Conseils et exercices pour s’échauffer, prévenir les blessures, améliorer la réception et pratiquer dans de bonnes conditions.</li>
+                <p style="text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 1rem;">Voici les catégories disponibles :</p>
+                <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Débutant :</strong> Les bases du parkour pour apprendre les fondamentaux (rolls, sauts, équilibre, etc.) en toute sécurité.</li>
+                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Intermédiaire :</strong> Des techniques plus avancées et des enchaînements pour gagner en fluidité et en maîtrise.</li>
+                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Confirmé :</strong> Des mouvements complexes, des combinaisons techniques et du travail de précision.</li>
+                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Freerun :</strong> Axé sur l’aspect acrobatique et esthétique du mouvement (flips, twists, combos stylisés).</li>
+                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Freerun Variant :</strong> Variantes créatives, mouvements hybrides et enchaînements personnels.</li>
+                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Sécurité :</strong> Conseils et exercices pour s’échauffer, prévenir les blessures et améliorer la réception.</li>
                 </ul>
             </div>
 
-            <div class="manifesto-footer">
-                Ces tutoriels ne sont pas réalisés par nous, mais par des traceurs et créateurs de contenu passionnés. Notre but est de regrouper le meilleur du web, de manière claire et structurée, pour t’aider à progresser à ton rythme. La section est régulièrement mise à jour avec de nouvelles vidéos.
+            <div style="border-top: 1px solid var(--border); padding-top: 1.5rem; font-size: 0.85rem; color: #666; font-style: italic;">
+                Ces tutoriels ne sont pas réalisés par nous, mais par des traceurs et créateurs de contenu passionnés. Notre but est de regrouper le meilleur du web, de manière claire et structurée. La section est régulièrement mise à jour.
             </div>
         </div>
 
-        <div class="tutos-search-engine">
-            <form onsubmit="event.preventDefault(); executerRechercheTuto();" class="search-form">
-                <input type="text" id="search-tuto-input" placeholder="Rechercher une technique sur le réseau..." autocomplete="off">
+        <div style="margin-bottom: 2rem;">
+            <form onsubmit="event.preventDefault(); executerRechercheTuto();" style="display: flex; gap: 1rem; width: 100%;">
+                <input type="text" id="search-tuto-input" placeholder="Rechercher une technique (ex: Saut, Costal, Flip)..." autocomplete="off" onkeyup="executerRechercheTuto()" style="flex: 1; background: transparent; border: none; border-bottom: 2px solid var(--border); color: var(--text); font-size: 1.2rem; padding: 1rem 0; font-family: var(--font); transition: border-color 0.3s ease;">
                 <button type="submit" class="btn-core">Rechercher</button>
             </form>
         </div>
 
-        <div class="tutos-filters" id="tuto-filters">
-            <button class="filter-badge active" onclick="filtrerTutos('all')">Tout</button>
-            <button class="filter-badge" onclick="filtrerTutos('debutant')">Débutant</button>
-            <button class="filter-badge" onclick="filtrerTutos('intermediaire')">Intermédiaire</button>
-            <button class="filter-badge" onclick="filtrerTutos('confirme')">Confirmé</button>
-            <button class="filter-badge" onclick="filtrerTutos('freerun')">Freerun</button>
-            <button class="filter-badge" onclick="filtrerTutos('variant')">Freerun Variant</button>
-            <button class="filter-badge" onclick="filtrerTutos('securite')">Sécurité</button>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 4rem;">
+            <button class="filter-badge active" onclick="filtrerTutos('all')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Tout</button>
+            <button class="filter-badge" onclick="filtrerTutos('debutant')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Débutant</button>
+            <button class="filter-badge" onclick="filtrerTutos('intermediaire')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Intermédiaire</button>
+            <button class="filter-badge" onclick="filtrerTutos('confirme')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Confirmé</button>
+            <button class="filter-badge" onclick="filtrerTutos('freerun')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Freerun</button>
+            <button class="filter-badge" onclick="filtrerTutos('variant')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Freerun Variant</button>
+            <button class="filter-badge" onclick="filtrerTutos('securite')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Sécurité</button>
         </div>
 
-        <div class="tutos-video-grid" id="video-grid">
+        <div id="video-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem;">
             </div>
     </main>
 
@@ -813,29 +813,33 @@
             document.getElementById('tracking-result').style.display = 'block';
         }
 
-        // --- 6. MOTEUR DE TUTORIELS YOUTUBE ---
+  // --- 6. MOTEUR DE TUTORIELS YOUTUBE (VERSION CORRIGÉE ET CONNECTÉE) ---
+        
+        // Ta vraie base de données avec les vidéos de la communauté
         const baseVideos = [
-            { id: "v_7rCjC0830", titre: "Les Bases : La Roulade (Roll)", categorie: "debutant" },
-            { id: "O1x06hD6KTo", titre: "Le Passe-Muraille Parfait", categorie: "intermediaire" },
-            { id: "x0ZlY5_hX0o", titre: "Tuto Double Kong", categorie: "confirme" },
-            { id: "x0G9s3vT3uY", titre: "Apprendre le Side Flip", categorie: "freerun" },
-            { id: "k-f_UjYw8P0", titre: "Corkscrew & Variations", categorie: "variant" },
-            { id: "z2E6sJ_1vU8", titre: "Échauffement et Prévention", categorie: "securite" }
-            // Ajoute simplement tes ID YouTube ici à l'avenir
+            { id: "wnicC95Y3HM", titre: "APPRENDRE LE PARKOUR FACILEMENT !!", categorie: "debutant" },
+            { id: "PIqgRRJy5pY", titre: "Saut de précision - Les Fondamentaux", categorie: "debutant" },
+            { id: "7guTBeFGCak", titre: "Passe-Muraille (Wall Run) & Kong", categorie: "intermediaire" },
+            { id: "1IlCQN6GDgE", titre: "TUTO COSTAL - SIDE FLIP", categorie: "freerun" },
+            { id: "C7MZylxt2Qo", titre: "HOW TO SIDE FLIP (ARABIAN FLIP)", categorie: "variant" },
+            { id: "G2GY9E99Yls", titre: "Double Side Flip sur mini tramp", categorie: "confirme" },
+            { id: "Mb54DH9cR1Y", titre: "Tuto Parkour : Roulade et Réception", categorie: "securite" }
         ];
 
         function genererGrilleVideos(videosA_afficher) {
             const grid = document.getElementById('video-grid');
-            if(!grid) return; // Sécurité si la grille n'est pas trouvée
+            if(!grid) return; // Sécurité vitale
             
             grid.innerHTML = ''; 
 
             if (videosA_afficher.length === 0) {
-                grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1 / -1;">Aucun tutoriel trouvé pour cette recherche.</p>';
+                // Message d'erreur stylisé si la recherche ne donne rien
+                grid.innerHTML = '<p style="color: #ff3333; grid-column: 1 / -1; font-size: 1.2rem; font-weight: 800;">Aucun tutoriel trouvé pour cette recherche. Essaie un autre mot-clé.</p>';
                 return;
             }
 
             videosA_afficher.forEach(video => {
+                // Formatage propre du nom de la catégorie pour l'interface
                 let nomCat = video.categorie;
                 if(nomCat === "securite") nomCat = "Sécurité";
                 if(nomCat === "intermediaire") nomCat = "Intermédiaire";
@@ -845,13 +849,13 @@
                 if(nomCat === "freerun") nomCat = "Freerun";
 
                 const videoHTML = `
-                    <div class="video-wrapper">
-                        <div class="youtube-container">
-                            <iframe src="https://www.youtube.com/embed/${video.id}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #111; border: 1px solid var(--border);">
+                            <iframe src="https://www.youtube.com/embed/${video.id}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div>
-                            <span class="video-tag">${nomCat}</span>
-                            <h4 class="video-title">${video.titre}</h4>
+                            <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">${nomCat}</span>
+                            <h4 style="font-size: 1.1rem; font-weight: 800; text-transform: uppercase; line-height: 1.3;">${video.titre}</h4>
                         </div>
                     </div>
                 `;
@@ -859,11 +863,27 @@
             });
         }
 
+        // Fonction des boutons cliquables (Filtres)
         function filtrerTutos(categorie) {
             const boutons = document.querySelectorAll('.filter-badge');
-            boutons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            
+            // Reset du style de tous les boutons
+            boutons.forEach(btn => {
+                btn.style.backgroundColor = 'transparent';
+                btn.style.color = 'var(--text)';
+            });
+            
+            // Activation du bouton cliqué
+            if (event && event.target) {
+                event.target.style.backgroundColor = 'var(--text)';
+                event.target.style.color = 'var(--bg)';
+            }
+            
+            // On vide la barre de recherche textuelle pour éviter les conflits
+            const searchInput = document.getElementById('search-tuto-input');
+            if(searchInput) searchInput.value = '';
 
+            // Filtrage des données
             if (categorie === 'all') {
                 genererGrilleVideos(baseVideos);
             } else {
@@ -872,11 +892,34 @@
             }
         }
 
-        function executerRechercheTuto() {
-            const requete = document.getElementById('search-tuto-input').value.toLowerCase();
-            const resultats = baseVideos.filter(v => v.titre.toLowerCase().includes(requete));
+        // Moteur de Live Search (Recherche en temps réel au clavier)
+        function executerRechercheTuto(event) {
+            if(event) event.preventDefault();
             
-            document.querySelectorAll('.filter-badge').forEach(btn => btn.classList.remove('active'));
+            const inputElement = document.getElementById('search-tuto-input');
+            if(!inputElement) return;
+            
+            const requete = inputElement.value.toLowerCase().trim();
+            
+            // Réinitialise l'aspect visuel des boutons de filtre si on tape du texte
+            const boutons = document.querySelectorAll('.filter-badge');
+            boutons.forEach(btn => {
+                btn.style.backgroundColor = 'transparent';
+                btn.style.color = 'var(--text)';
+            });
+            
+            // Remet le bouton "Tout" en surbrillance si on efface la recherche
+            if(requete === "" && boutons.length > 0) {
+                boutons[0].style.backgroundColor = 'var(--text)';
+                boutons[0].style.color = 'var(--bg)';
+            }
+            
+            // Cherche dans le titre OU la catégorie (logique permissive avancée)
+            const resultats = baseVideos.filter(v => 
+                v.titre.toLowerCase().includes(requete) || 
+                v.categorie.toLowerCase().includes(requete)
+            );
+            
             genererGrilleVideos(resultats);
         }
 
