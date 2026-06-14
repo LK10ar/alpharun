@@ -684,7 +684,7 @@
         </div>
     </main>
 
-    <script>
+   <script>
         // --- 1. ROUTEUR SPA ---
         const AlphaRouter = {
             routes: ['#accueil', '#tutos', '#spots', '#evenements', '#shop', '#panier', '#compte', '#suivi', '#contact'],
@@ -827,7 +827,7 @@
             document.getElementById('tracking-result').style.display = 'block';
         }
 
-        // --- 6. MOTEUR DE TUTORIELS YOUTUBE (MULTILINGUE ET CONNECTÉ À L'API RENDER) ---
+        // --- 6. MOTEUR DE TUTORIELS YOUTUBE (MULTILINGUE ET SANS CACHE) ---
         let allVideos = []; 
         let currentLang = 'fr'; // Langue par défaut
         let currentCat = 'all'; // Catégorie par défaut
@@ -840,7 +840,8 @@
             grid.innerHTML = '<p style="color:var(--text-muted); grid-column: 1 / -1; text-align: center; font-size: 1.2rem;">Connexion au serveur... Chargement des tutos en cours...</p>';
 
             try {
-                const response = await fetch('https://alpharun-backend.onrender.com/api/videos');
+                // Le { cache: 'no-store' } est très important ici pour éviter les bugs d'affichage !
+                const response = await fetch('https://alpharun-backend.onrender.com/api/videos', { cache: 'no-store' });
                 allVideos = await response.json();
                 appliquerFiltresEtRecherche(); // Affiche avec les filtres par défaut
             } catch (error) {
@@ -887,8 +888,11 @@
 
         // Action : Changement du sélecteur de langue
         function changerLangue() {
-            currentLang = document.getElementById('lang-selector').value;
-            appliquerFiltresEtRecherche();
+            const selectElement = document.getElementById('lang-selector');
+            if (selectElement) {
+                currentLang = selectElement.value;
+                appliquerFiltresEtRecherche();
+            }
         }
 
         // Action : Clic sur un bouton de catégorie
@@ -915,9 +919,11 @@
             appliquerFiltresEtRecherche();
         }
 
-        // LE MOTEUR DE MULTI-FILTRAGE CENTRAL
+        // LE MOTEUR DE MULTI-FILTRAGE CENTRAL (Insensible aux accents)
         function appliquerFiltresEtRecherche() {
-            const requete = (document.getElementById('search-tuto-input').value || '').toLowerCase().trim();
+            // On récupère le texte, on le met en minuscule, et on enlève les accents
+            let requete = document.getElementById('search-tuto-input').value || '';
+            requete = requete.toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
             const resultats = allVideos.filter(v => {
                 const videoLang = v.langue || 'fr';
@@ -928,10 +934,12 @@
                 // 2. Validation de la catégorie active
                 const matchCat = (currentCat === 'all') ? true : (v.categorie === currentCat);
                 
-                // 3. Validation du mot-clé recherché
+                // 3. Validation du mot-clé recherché (sans accents)
+                const titreNettoye = (v.titre || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                const catNettoye = (v.categorie || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                
                 const matchTexte = (requete === "") ? true : (
-                    (v.titre && v.titre.toLowerCase().includes(requete)) || 
-                    (v.categorie && v.categorie.toLowerCase().includes(requete))
+                    titreNettoye.includes(requete) || catNettoye.includes(requete)
                 );
 
                 return matchLangue && matchCat && matchTexte;
@@ -945,8 +953,8 @@
             AlphaRouter.init();
             UIController.init();
             actualiserInterfacePanier();
-            chargerVideos(); // Récupération API
+            chargerVideos(); // Récupération API au démarrage
         });
-    </script>
+</script>
 </body>
 </html>
