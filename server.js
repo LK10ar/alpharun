@@ -188,3 +188,61 @@ app.listen(PORT, () => {
     ======================================
     `);
 });
+// --- AJOUTS DANS server.js ---
+const cheerio = require('cheerio'); // Pour scanner le HTML de WordPress
+
+// A. Nouveau Schéma pour les Vidéos
+const VideoSchema = new mongoose.Schema({
+    id: { type: String, unique: true }, // ID YouTube
+    titre: String,
+    categorie: String
+});
+const Video = mongoose.model('Video', VideoSchema);
+
+// B. ROUTE D'ADMINISTRATION : SYNC AUTOMATIQUE
+// Appelle cette route depuis ton navigateur pour déclencher la copie
+app.get('/api/sync-videos', async (req, res) => {
+    try {
+        console.log("🔄 Début de la synchronisation avec WordPress...");
+        
+        // 1. Récupération des posts depuis ton WordPress
+        const response = await axios.get('https://alpha-run.com/wp-json/wp/v2/posts?per_page=50');
+        const posts = response.data;
+
+        let videosImportees = 0;
+
+        for (const post of posts) {
+            const htmlContent = post.content.rendered;
+            const $ = cheerio.load(htmlContent);
+
+            // 2. Scan du contenu pour trouver les iframes YouTube
+            $('iframe').each(async (i, el) => {
+                const src = $(el).attr('src');
+                if (src && src.includes('youtube.com/embed/')) {
+                    const videoId = src.split('embed/')[1].split('?')[0];
+                    
+                    // 3. Sauvegarde dans MongoDB (avec 'upsert' pour éviter les doublons)
+                    await Video.findOneAndUpdate(
+                        { id: videoId },
+                        { 
+                            id: videoId, 
+                            titre: post.title.rendered, 
+                            categorie: 'debutant' // Par défaut, on classe tout en débutant le temps du tri
+                        },
+                        { upsert: true, new: true }
+                    );
+                    videosImportees++;
+                }
+            });
+        }
+
+        res.status(200).json({ 
+            message: `Synchronisation terminée. ${videosImportees} vidéos traitées.`,
+            status: "success" 
+        });
+
+    } catch (error) {
+        console.error("❌ Erreur de sync :", error);
+        res.status(500).json({ error: "Erreur lors de la synchronisation." });
+    }
+});
