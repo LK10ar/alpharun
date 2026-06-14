@@ -930,6 +930,27 @@
             actualiserInterfacePanier();
             genererGrilleVideos(baseVideos); // Allumage du moteur vidéo
         });
+       // Fonction pour charger les vidéos depuis ton backend Render
+async function chargerVideos() {
+    try {
+        const response = await fetch('https://alpharun-backend.onrender.com/api/videos');
+        const videos = await response.json();
+        
+        console.log("Vidéos reçues :", videos);
+        
+        // Exemple : Afficher les titres dans la console
+        videos.forEach(video => {
+            console.log(`Vidéo trouvée : ${video.titre} (ID: ${video.id})`);
+            // Ici, tu pourras créer tes éléments HTML dynamiquement
+        });
+        
+    } catch (error) {
+        console.error("Erreur lors du chargement des vidéos :", error);
+    }
+}
+
+// Lancer le chargement au démarrage du site
+chargerVideos();
     </script>
 </body>
 </html>
