@@ -342,6 +342,26 @@
             .search-form { flex-direction: column; }
             .search-form input { font-size: 1.2rem; }
         }
+        .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.video-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.video-card iframe {
+    width: 100%;
+    height: 200px;
+}
     </style>
 </head>
 <body>
@@ -788,7 +808,7 @@
             btn.innerText = "Connexion sécurisée en cours...";
 
             try {
-                const response = await fetch('http://localhost:3000/api/creer-paiement', {
+               const response = await fetch('https://alpharun-backend.onrender.com/api/creer-paiement', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ items: panier })
@@ -813,34 +833,41 @@
             document.getElementById('tracking-result').style.display = 'block';
         }
 
-  // --- 6. MOTEUR DE TUTORIELS YOUTUBE (VERSION CORRIGÉE ET CONNECTÉE) ---
+ // --- 6. MOTEUR DE TUTORIELS YOUTUBE (CONNECTÉ À L'API RENDER) ---
         
-        // Ta vraie base de données avec les vidéos de la communauté
-        const baseVideos = [
-            { id: "wnicC95Y3HM", titre: "APPRENDRE LE PARKOUR FACILEMENT !!", categorie: "debutant" },
-            { id: "PIqgRRJy5pY", titre: "Saut de précision - Les Fondamentaux", categorie: "debutant" },
-            { id: "7guTBeFGCak", titre: "Passe-Muraille (Wall Run) & Kong", categorie: "intermediaire" },
-            { id: "1IlCQN6GDgE", titre: "TUTO COSTAL - SIDE FLIP", categorie: "freerun" },
-            { id: "C7MZylxt2Qo", titre: "HOW TO SIDE FLIP (ARABIAN FLIP)", categorie: "variant" },
-            { id: "G2GY9E99Yls", titre: "Double Side Flip sur mini tramp", categorie: "confirme" },
-            { id: "Mb54DH9cR1Y", titre: "Tuto Parkour : Roulade et Réception", categorie: "securite" }
-        ];
+        let allVideos = []; // Remplace l'ancienne baseVideos en dur
 
+        // Récupération des vidéos depuis le serveur
+        async function chargerVideos() {
+            const grid = document.getElementById('video-grid');
+            if(!grid) return;
+            
+            grid.innerHTML = '<p style="color:var(--text-muted); grid-column: 1 / -1; text-align: center; font-size: 1.2rem;">Connexion au serveur... Chargement des tutos en cours...</p>';
+
+            try {
+                const response = await fetch('https://alpharun-backend.onrender.com/api/videos');
+                allVideos = await response.json();
+                genererGrilleVideos(allVideos);
+            } catch (error) {
+                console.error("Erreur de chargement des vidéos:", error);
+                grid.innerHTML = '<p style="color:#ff3333; grid-column: 1 / -1; text-align: center; font-weight: 800;">Erreur : Impossible de charger les vidéos depuis le serveur.</p>';
+            }
+        }
+
+        // Affichage des vidéos avec ton design personnalisé
         function genererGrilleVideos(videosA_afficher) {
             const grid = document.getElementById('video-grid');
-            if(!grid) return; // Sécurité vitale
+            if(!grid) return;
             
             grid.innerHTML = ''; 
 
             if (videosA_afficher.length === 0) {
-                // Message d'erreur stylisé si la recherche ne donne rien
                 grid.innerHTML = '<p style="color: #ff3333; grid-column: 1 / -1; font-size: 1.2rem; font-weight: 800;">Aucun tutoriel trouvé pour cette recherche. Essaie un autre mot-clé.</p>';
                 return;
             }
 
             videosA_afficher.forEach(video => {
-                // Formatage propre du nom de la catégorie pour l'interface
-                let nomCat = video.categorie;
+                let nomCat = video.categorie || 'non classé';
                 if(nomCat === "securite") nomCat = "Sécurité";
                 if(nomCat === "intermediaire") nomCat = "Intermédiaire";
                 if(nomCat === "confirme") nomCat = "Confirmé";
@@ -867,32 +894,29 @@
         function filtrerTutos(categorie) {
             const boutons = document.querySelectorAll('.filter-badge');
             
-            // Reset du style de tous les boutons
             boutons.forEach(btn => {
                 btn.style.backgroundColor = 'transparent';
                 btn.style.color = 'var(--text)';
             });
             
-            // Activation du bouton cliqué
             if (event && event.target) {
                 event.target.style.backgroundColor = 'var(--text)';
                 event.target.style.color = 'var(--bg)';
             }
             
-            // On vide la barre de recherche textuelle pour éviter les conflits
             const searchInput = document.getElementById('search-tuto-input');
             if(searchInput) searchInput.value = '';
 
-            // Filtrage des données
+            // Utilise allVideos au lieu de l'ancienne baseVideos
             if (categorie === 'all') {
-                genererGrilleVideos(baseVideos);
+                genererGrilleVideos(allVideos);
             } else {
-                const videosFiltrees = baseVideos.filter(v => v.categorie === categorie);
+                const videosFiltrees = allVideos.filter(v => v.categorie === categorie);
                 genererGrilleVideos(videosFiltrees);
             }
         }
 
-        // Moteur de Live Search (Recherche en temps réel au clavier)
+        // Moteur de Live Search (Recherche en temps réel)
         function executerRechercheTuto(event) {
             if(event) event.preventDefault();
             
@@ -901,23 +925,21 @@
             
             const requete = inputElement.value.toLowerCase().trim();
             
-            // Réinitialise l'aspect visuel des boutons de filtre si on tape du texte
             const boutons = document.querySelectorAll('.filter-badge');
             boutons.forEach(btn => {
                 btn.style.backgroundColor = 'transparent';
                 btn.style.color = 'var(--text)';
             });
             
-            // Remet le bouton "Tout" en surbrillance si on efface la recherche
             if(requete === "" && boutons.length > 0) {
                 boutons[0].style.backgroundColor = 'var(--text)';
                 boutons[0].style.color = 'var(--bg)';
             }
             
-            // Cherche dans le titre OU la catégorie (logique permissive avancée)
-            const resultats = baseVideos.filter(v => 
-                v.titre.toLowerCase().includes(requete) || 
-                v.categorie.toLowerCase().includes(requete)
+            // Cherche dans allVideos
+            const resultats = allVideos.filter(v => 
+                (v.titre && v.titre.toLowerCase().includes(requete)) || 
+                (v.categorie && v.categorie.toLowerCase().includes(requete))
             );
             
             genererGrilleVideos(resultats);
@@ -928,29 +950,8 @@
             AlphaRouter.init();
             UIController.init();
             actualiserInterfacePanier();
-            genererGrilleVideos(baseVideos); // Allumage du moteur vidéo
+            chargerVideos(); // On lance la récupération API au démarrage
         });
-       // Fonction pour charger les vidéos depuis ton backend Render
-async function chargerVideos() {
-    try {
-        const response = await fetch('https://alpharun-backend.onrender.com/api/videos');
-        const videos = await response.json();
-        
-        console.log("Vidéos reçues :", videos);
-        
-        // Exemple : Afficher les titres dans la console
-        videos.forEach(video => {
-            console.log(`Vidéo trouvée : ${video.titre} (ID: ${video.id})`);
-            // Ici, tu pourras créer tes éléments HTML dynamiquement
-        });
-        
-    } catch (error) {
-        console.error("Erreur lors du chargement des vidéos :", error);
-    }
-}
-
-// Lancer le chargement au démarrage du site
-chargerVideos();
     </script>
 </body>
 </html>
