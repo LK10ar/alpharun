@@ -6,226 +6,200 @@
     <title>AlphaRun | Core Engine</title>
     <style>
         /* --- DESIGN SYSTEM & RESET --- */
-        :root { --bg: #000000; --text: #ffffff; --text-muted: #888888; --border: #222222; --border-hover: #ffffff; --font: 'Helvetica Neue', Arial, sans-serif; --transition: cubic-bezier(0.16, 1, 0.3, 1) 0.6s; --header-height: 80px; }
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        body { background-color: var(--bg); color: var(--text); font-family: var(--font); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        :root { 
+            --bg: #000000; 
+            --text: #ffffff; 
+            --text-muted: #888888; 
+            --border: #222222; 
+            --border-hover: #ffffff; 
+            --font: 'Helvetica Neue', Arial, sans-serif; 
+            --transition: cubic-bezier(0.16, 1, 0.3, 1) 0.6s; 
+            --header-height: 80px; 
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            outline: none; 
+        }
+
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: var(--font); 
+            overflow-x: hidden; 
+            -webkit-font-smoothing: antialiased; 
+        }
 
         /* --- NAVIGATION --- */
-        header { position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); padding: 0 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-bottom: 1px solid var(--border); background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px); }
-        .logo-img { max-height: 40px; width: auto; display: block; transition: opacity 0.3s ease; }
-        .logo-img:hover { opacity: 0.8; }
+        header { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: var(--header-height); 
+            padding: 0 3rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            z-index: 1000; 
+            border-bottom: 1px solid var(--border); 
+            background: rgba(0, 0, 0, 0.85); 
+            backdrop-filter: blur(20px); 
+        }
+
+        .logo-img { 
+            max-height: 80px; 
+            width: auto; 
+            display: block; 
+            transition: opacity 0.3s ease; 
+        }
+
+        .logo-img:hover { 
+            opacity: 0.8; 
+        }
         
-        nav ul { display: flex; list-style: none; gap: 2rem; align-items: center; }
-        nav a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; transition: color 0.3s ease; }
-        nav a:hover, nav a.active { color: var(--text); }
+        nav ul { 
+            display: flex; 
+            list-style: none; 
+            gap: 2rem; 
+            align-items: center; 
+        }
+
+        nav a { 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            transition: color 0.3s ease; 
+        }
+
+        nav a:hover, nav a.active { 
+            color: var(--text); 
+        }
 
         /* --- BADGE PANIER --- */
-        .cart-badge { background: var(--text); color: var(--bg); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 900; margin-left: 5px; transition: all 0.3s ease; }
+        .cart-badge { 
+            background: var(--text); 
+            color: var(--bg); 
+            padding: 2px 8px; 
+            border-radius: 12px; 
+            font-size: 0.75rem; 
+            font-weight: 900; 
+            margin-left: 5px; 
+            transition: all 0.3s ease; 
+        }
 
         /* --- MENU BURGER --- */
-        .burger { display: none; width: 32px; height: 20px; background: transparent; border: none; cursor: pointer; z-index: 2000; position: relative; }
-        .burger span { display: block; position: absolute; width: 100%; height: 2px; background: var(--text); left: 0; transition: transform 0.4s var(--transition), opacity 0.3s ease; }
-        .burger .line1 { top: 0; } .burger .line2 { top: 9px; } .burger .line3 { top: 18px; }
+        .burger { 
+            display: none; 
+            width: 32px; 
+            height: 20px; 
+            background: transparent; 
+            border: none; 
+            cursor: pointer; 
+            z-index: 2000; 
+            position: relative; 
+        }
+
+        .burger span { 
+            display: block; 
+            position: absolute; 
+            width: 100%; 
+            height: 2px; 
+            background: var(--text); 
+            left: 0; 
+            transition: transform 0.4s var(--transition), opacity 0.3s ease; 
+        }
+
+        .burger .line1 { top: 0; } 
+        .burger .line2 { top: 9px; } 
+        .burger .line3 { top: 18px; }
+
         .burger.toggle .line1 { transform: translateY(9px) rotate(45deg); }
         .burger.toggle .line2 { opacity: 0; transform: scaleX(0); }
         .burger.toggle .line3 { transform: translateY(-9px) rotate(-45deg); }
 
         /* --- ROUTER VIEWS --- */
-        .page-view { display: none; min-height: 100vh; padding: calc(var(--header-height) + 4rem) 3rem 4rem 3rem; opacity: 0; transform: translateY(10px); transition: opacity var(--transition), transform var(--transition); }
-        .page-view.active { display: flex; flex-direction: column; opacity: 1; transform: translateY(0); }
-
-        /* --- TYPOGRAPHY & BUTTONS --- */
-        h1.section-title { font-size: 6rem; font-weight: 900; text-transform: uppercase; letter-spacing: -3px; line-height: 0.9; margin-bottom: 3rem; }
-        .subtitle { font-size: 1.5rem; color: var(--text-muted); margin-bottom: 2.5rem; font-weight: 300; }
-        
-        .btn-core { display: inline-block; padding: 1.2rem 2.5rem; background: var(--text); color: var(--bg); text-decoration: none; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; border: 1px solid var(--text); transition: all 0.4s var(--transition); cursor: pointer; width: fit-content; }
-        .btn-core:hover { background: var(--bg); color: var(--text); border-color: var(--text); }
-        .btn-outline { background: transparent; color: var(--text); }
-        .btn-outline:hover { background: var(--text); color: var(--bg); }
-
-        /* --- PAGE 1: ACCUEIL --- */
-        #accueil { justify-content: center; align-items: flex-start; background: radial-gradient(circle at 80% 20%, #111111 0%, #000000 60%); }
-        .hero-manifesto { font-size: 1.5rem; color: var(--text-muted); max-width: 650px; margin-bottom: 2.5rem; line-height: 1.5; font-weight: 300; }
-
-        /* --- PAGE 2: TUTOS --- */
-        .tutos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
-        .tuto-card { border: 1px solid var(--border); padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; height: 350px; transition: all 0.4s var(--transition); }
-        .tuto-card:hover { border-color: var(--border-hover); background: #0a0a0a; }
-        .tuto-meta { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
-        .tuto-card h3 { font-size: 2rem; font-weight: 800; text-transform: uppercase; margin: 1.5rem 0 0.5rem 0; }
-        .tuto-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.4; }
-        .tuto-action { margin-top: auto; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; text-decoration: underline; cursor: pointer; }
-
-        /* --- PAGE 3: SPOTS --- */
-        .spots-wrapper { display: grid; grid-template-columns: 400px 1fr; gap: 2rem; height: calc(100vh - 15rem); }
-        .spots-sidebar { overflow-y: auto; border: 1px solid var(--border); padding-right: 10px; }
-        .spot-node { padding: 2rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.3s ease; }
-        .spot-node:hover { background: #0a0a0a; }
-        .spot-node h3 { text-transform: uppercase; font-size: 1.25rem; font-weight: 800; }
-        .spot-node p { color: var(--text-muted); font-size: 0.85rem; }
-        .map-engine { border: 1px solid var(--border); background: #050505; display: flex; align-items: center; justify-content: center; position: relative; }
-        .map-mock-core { z-index: 2; text-align: center; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px;}
-
-        /* --- PAGE 4: EVENEMENTS --- */
-        .events-timeline { display: flex; flex-direction: column; }
-        .event-entry { display: grid; grid-template-columns: 150px 1fr auto; align-items: center; padding: 2.5rem 0; border-bottom: 1px solid var(--border); transition: border-color 0.3s ease; }
-        .event-entry:hover { border-color: var(--border-hover); }
-        .ev-date { font-size: 1.1rem; font-weight: 800; }
-        .ev-meta h3 { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; }
-        .ev-meta p { color: var(--text-muted); font-size: 0.9rem; }
-
-        /* --- PAGE 5: CONTACT --- */
-        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-        .contact-info h3 { font-size: 2rem; text-transform: uppercase; font-weight: 800; margin-bottom: 1rem; }
-        .contact-info p { color: var(--text-muted); max-width: 400px; margin-bottom: 2rem; }
-
-        /* --- PAGE 6: SHOP --- */
-        .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; }
-        .product-card { display: flex; flex-direction: column; border: 1px solid var(--border); transition: border-color 0.3s ease; }
-        .product-card:hover { border-color: var(--border-hover); }
-        .product-image { height: 300px; background: #111; display: flex; align-items: center; justify-content: center; color: var(--text-muted); border-bottom: 1px solid var(--border); }
-        .product-info { padding: 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; }
-        .product-name { font-size: 1.1rem; font-weight: 800; text-transform: uppercase; }
-        .product-price { font-weight: 900; color: var(--text-muted); font-size: 1.2rem; }
-        .btn-add { width: 100%; border: none; border-top: 1px solid var(--border); padding: 1rem; text-align: center; cursor: pointer; background: transparent; color: var(--text); text-transform: uppercase; font-weight: 800; transition: all 0.3s; }
-        .btn-add:hover { background: var(--text); color: var(--bg); }
-
-        /* --- FORMS GLOBALS (LOGIN / TRACKING / CONTACT) --- */
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-        .form-container { display: flex; flex-direction: column; gap: 2rem; width: 100%; }
-        .form-group { display: flex; flex-direction: column; position: relative; }
-        .form-group label { text-transform: uppercase; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; }
-        .form-group input, .form-group textarea { background: transparent; border: none; border-bottom: 1px solid var(--border); color: var(--text); padding: 0.75rem 0; font-size: 1rem; transition: border-color 0.3s; font-family: var(--font); }
-        .form-group input:focus, .form-group textarea:focus { border-bottom-color: var(--border-hover); }
-
-        /* --- CART TABLE --- */
-        .cart-table { width: 100%; border-collapse: collapse; margin-bottom: 3rem; }
-        .cart-table th { text-align: left; padding: 1rem 0; border-bottom: 2px solid var(--border); text-transform: uppercase; font-size: 0.8rem; color: var(--text-muted); }
-        .cart-table td { padding: 1.5rem 0; border-bottom: 1px solid var(--border); vertical-align: middle; }
-        .cart-item-name { font-weight: 800; text-transform: uppercase; font-size: 1.1rem; }
-        .cart-item-price { font-weight: 700; font-variant-numeric: tabular-nums; }
-        .cart-remove { color: #ff3333; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; }
-        .cart-summary { display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; border-bottom: 2px solid var(--text); margin-bottom: 2rem; }
-        .cart-total { font-size: 2.5rem; font-weight: 900; }
-
-        /* --- RESPONSIVE MOBILE --- */
-        @media (max-width: 1024px) {
-            h1.section-title { font-size: 4rem; }
-            .spots-wrapper { grid-template-columns: 1fr; height: auto; }
-            .map-engine { height: 400px; }
-            .contact-container, .form-grid { grid-template-columns: 1fr; gap: 3rem; }
-            nav ul { gap: 1rem; }
-        }
-
-        @media (max-width: 768px) {
-            header { padding: 0 1.5rem; }
-            .burger { display: block; }
-            nav { position: fixed; top: 0; right: -100%; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1); z-index: 1500; }
-            nav.nav-active { right: 0; }
-            nav ul { flex-direction: column; gap: 2rem; text-align: center; }
-            nav a { font-size: 1.5rem; }
-            .page-view { padding: calc(var(--header-height) + 2rem) 1.5rem 2rem 1.5rem; }
-            h1.section-title { font-size: 3rem; }
-            .cart-table th { display: none; }
-            .cart-table td { display: block; padding: 0.5rem 0; border: none; }
-            .cart-table tr { display: block; border-bottom: 1px solid var(--border); padding: 1rem 0; }
-            .cart-summary { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .event-entry { grid-template-columns: 1fr; gap: 1rem; align-items: flex-start; }
-            .event-entry .btn-core { width: 100%; text-align: center; }
-        }
-        
-        /* --- BANNIÈRE VIDÉO YOUTUBE GLOBALE --- */
-        :root {
-            --banner-height: 25vh;
-        }
-
-        .global-banner {
-            position: relative;
-            margin-top: var(--header-height);
-            width: 100vw;
-            height: var(--banner-height);
-            background: var(--bg);
-            overflow: hidden;
-            border-bottom: 2px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .video-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100vw;
-            height: 56.25vw;
-            min-height: 100%;
-            min-width: 177.77vh;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.4;
-            filter: grayscale(100%) contrast(1.2);
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .banner-overlay {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-        }
-
-        /* --- EFFET GLITCH --- */
-        .glitch-text {
-            font-size: 4.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text);
-            position: relative;
-            display: inline-block;
-            font-style: italic;
-        }
-
-        .glitch-text::before, .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-        }
-
-        .glitch-text::before { color: #0ff; z-index: -1; transform: translate(-4px, 2px); }
-        .glitch-text::after { color: #f0f; z-index: -2; transform: translate(4px, -2px); }
-
         .page-view { 
             display: none; 
-            min-height: calc(100vh - var(--header-height) - var(--banner-height)); 
-            padding: 3rem 3rem 4rem 3rem; 
+            min-height: 100vh; 
+            padding: calc(var(--header-height) + 4rem) 3rem 4rem 3rem; 
             opacity: 0; 
             transform: translateY(10px); 
             transition: opacity var(--transition), transform var(--transition); 
         }
 
-        @media (max-width: 768px) {
-            .glitch-text { font-size: 2.5rem; }
-            .global-banner { height: 20vh; }
+        .page-view.active { 
+            display: flex; 
+            flex-direction: column; 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        /* --- TYPOGRAPHY & BUTTONS --- */
+        h1.section-title { 
+            font-size: 6rem; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            letter-spacing: -3px; 
+            line-height: 0.9; 
+            margin-bottom: 3rem; 
+        }
+
+        .subtitle { 
+            font-size: 1.5rem; 
+            color: var(--text-muted); 
+            margin-bottom: 2.5rem; 
+            font-weight: 300; 
         }
         
+        .btn-core { 
+            display: inline-block; 
+            padding: 1.2rem 2.5rem; 
+            background: var(--text); 
+            color: var(--bg); 
+            text-decoration: none; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            font-size: 0.85rem; 
+            border: 1px solid var(--text); 
+            transition: all 0.4s var(--transition); 
+            cursor: pointer; 
+            width: fit-content; 
+        }
+
+        .btn-core:hover { 
+            background: var(--bg); 
+            color: var(--text); 
+            border-color: var(--text); 
+        }
+
+        .btn-outline { 
+            background: transparent; 
+            color: var(--text); 
+        }
+
+        .btn-outline:hover { 
+            background: var(--text); 
+            color: var(--bg); 
+        }
+
+        /* --- PAGE 1: ACCUEIL --- */
         #accueil { 
+            justify-content: center; 
+            align-items: flex-start; 
+            background: radial-gradient(circle at 80% 20%, #111111 0%, #000000 60%); 
             display: none; 
             padding: calc(var(--header-height) + 2rem) 0 0 0;
         }
+
         #accueil.active { 
-            display: block;
+            display: block; 
         }
 
         .hero-section { 
@@ -234,42 +208,106 @@
             border-bottom: 1px solid var(--border); 
             display: flex; 
             flex-direction: column; 
-            align-items: center;
+            align-items: center; 
+        }
+
+        .hero-section h1 { 
+            font-size: 6rem; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            letter-spacing: -3px; 
+            line-height: 0.9; 
+            margin-bottom: 2rem; 
         }
         
-        .hero-section h1 { font-size: 6rem; font-weight: 900; text-transform: uppercase; letter-spacing: -3px; line-height: 0.9; margin-bottom: 2rem; }
-        
+        .hero-manifesto { 
+            font-size: 1.5rem; 
+            color: var(--text-muted); 
+            max-width: 650px; 
+            margin-bottom: 2.5rem; 
+            line-height: 1.5; 
+            font-weight: 300; 
+        }
+
         .stats-bar { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
             border-bottom: 1px solid var(--border); 
             background: #030303; 
         }
+
         .stat-box { 
             padding: 4rem 2rem; 
             text-align: center; 
             border-right: 1px solid var(--border); 
-            transition: background 0.3s ease;
+            transition: background 0.3s ease; 
         }
-        .stat-box:hover { background: #0a0a0a; }
-        .stat-box:last-child { border-right: none; }
-        .stat-num { display: block; font-size: 4.5rem; font-weight: 900; color: var(--text); line-height: 1; margin-bottom: 0.5rem; letter-spacing: -2px;}
-        .stat-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); font-weight: 700; }
+
+        .stat-box:hover { 
+            background: #0a0a0a; 
+        }
+
+        .stat-box:last-child { 
+            border-right: none; 
+        }
+
+        .stat-num { 
+            display: block; 
+            font-size: 4.5rem; 
+            font-weight: 900; 
+            color: var(--text); 
+            line-height: 1; 
+            margin-bottom: 0.5rem; 
+            letter-spacing: -2px;
+        }
+
+        .stat-label { 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            color: var(--text-muted); 
+            font-weight: 700; 
+        }
         
-        .split-section { padding: 8rem 3rem; border-bottom: 1px solid var(--border); }
-        .split-header { text-align: center; margin-bottom: 5rem; }
-        .split-header h2 { font-size: 3rem; text-transform: uppercase; font-weight: 900; letter-spacing: -1px; }
+        .split-section { 
+            padding: 8rem 3rem; 
+            border-bottom: 1px solid var(--border); 
+        }
+
+        .split-header { 
+            text-align: center; 
+            margin-bottom: 5rem; 
+        }
+
+        .split-header h2 { 
+            font-size: 3rem; 
+            text-transform: uppercase; 
+            font-weight: 900; 
+            letter-spacing: -1px; 
+        }
         
         .split-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
             gap: 5rem; 
             align-items: center; 
-            max-width: 1400px;
-            margin: 0 auto;
+            max-width: 1400px; 
+            margin: 0 auto; 
         }
-        .split-text h3 { font-size: 2.5rem; text-transform: uppercase; margin-bottom: 2rem; font-weight: 800; }
-        .split-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.05rem; }
+
+        .split-text h3 { 
+            font-size: 2.5rem; 
+            text-transform: uppercase; 
+            margin-bottom: 2rem; 
+            font-weight: 800; 
+        }
+
+        .split-text p { 
+            color: var(--text-muted); 
+            line-height: 1.8; 
+            margin-bottom: 1.5rem; 
+            font-size: 1.05rem; 
+        }
         
         .split-image img { 
             width: 100%; 
@@ -278,78 +316,527 @@
             filter: grayscale(100%) contrast(1.1); 
             transition: filter 0.5s ease; 
         }
-        .split-image img:hover { filter: grayscale(0%) contrast(1); }
+
+        .split-image img:hover { 
+            filter: grayscale(0%) contrast(1); 
+        }
         
         .community-cta { 
             padding: 8rem 3rem; 
             text-align: center; 
             background: radial-gradient(circle at center, #111 0%, #000 100%); 
         }
-        .community-cta h2 { font-size: 4rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: -2px;}
 
+        .community-cta h2 { 
+            font-size: 4rem; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            margin-bottom: 1.5rem; 
+            letter-spacing: -2px;
+        }
+
+        /* --- STYLES SECTION TUTORIELS --- */
+        .tutos-manifesto { 
+            border: 1px solid var(--border); 
+            padding: 3rem; 
+            margin-bottom: 4rem; 
+            background: #050505; 
+        }
+
+        .manifesto-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 1rem; 
+            margin-bottom: 1.5rem; 
+        }
+
+        .manifesto-header h3 { 
+            font-size: 1.5rem; 
+            text-transform: uppercase; 
+            font-weight: 900; 
+            letter-spacing: 1px; 
+        }
+
+        .manifesto-list { 
+            list-style: none; 
+            padding: 0; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 1.5rem; 
+        }
+
+        .manifesto-list li { 
+            color: var(--text-muted); 
+            font-size: 0.95rem; 
+            line-height: 1.5; 
+        }
+
+        .manifesto-list strong { 
+            color: var(--text); 
+            text-transform: uppercase; 
+            font-size: 0.85rem; 
+            letter-spacing: 1px; 
+            display: block; 
+            margin-bottom: 0.2rem; 
+        }
+
+        .search-form-container { 
+            display: flex; 
+            gap: 1rem; 
+            width: 100%; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            margin-bottom: 2rem; 
+        }
+
+        .search-form-container input { 
+            flex: 1; 
+            min-width: 250px; 
+            background: transparent; 
+            border: none; 
+            border-bottom: 2px solid var(--border); 
+            color: var(--text); 
+            font-size: 1.2rem; 
+            padding: 1rem 0; 
+            font-family: var(--font); 
+            transition: border-color 0.3s ease; 
+        }
+
+        .search-form-container input:focus { 
+            border-bottom-color: var(--text); 
+        }
+
+        .tutos-filters { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 0.8rem; 
+            margin-bottom: 3rem; 
+        }
+
+        .filter-badge { 
+            background: transparent; 
+            border: 1px solid var(--border); 
+            color: var(--text-muted); 
+            padding: 0.8rem 1.5rem; 
+            text-transform: uppercase; 
+            font-weight: 800; 
+            font-size: 0.75rem; 
+            letter-spacing: 1px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+        }
+
+        .filter-badge:hover, .filter-badge.active { 
+            background: var(--text); 
+            color: var(--bg); 
+            border-color: var(--text); 
+        }
+
+        /* GRILLE VIDÉO RESPONSIVE */
+        .video-grid-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+            gap: 2.5rem; 
+        }
+
+        .video-card-item { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 1rem; 
+        }
+
+        .video-card-iframe-wrapper { 
+            position: relative; 
+            width: 100%; 
+            padding-bottom: 56.25%; 
+            background: #111; 
+            border: 1px solid var(--border); 
+            border-radius: 8px; 
+            overflow: hidden; 
+        }
+
+        .video-card-iframe-wrapper iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+        }
+
+        /* --- PAGE 3: SPOTS --- */
+        .spots-wrapper { 
+            display: grid; 
+            grid-template-columns: 400px 1fr; 
+            gap: 2rem; 
+            height: calc(100vh - 15rem); 
+        }
+
+        .spots-sidebar { 
+            overflow-y: auto; 
+            border: 1px solid var(--border); 
+            padding-right: 10px; 
+        }
+
+        .spot-node { 
+            padding: 2rem; 
+            border-bottom: 1px solid var(--border); 
+            cursor: pointer; 
+            transition: background 0.3s ease; 
+        }
+
+        .spot-node:hover { 
+            background: #0a0a0a; 
+        }
+
+        .spot-node h3 { 
+            text-transform: uppercase; 
+            font-size: 1.25rem; 
+            font-weight: 800; 
+        }
+
+        .spot-node p { 
+            color: var(--text-muted); 
+            font-size: 0.85rem; 
+        }
+
+        .map-engine { 
+            border: 1px solid var(--border); 
+            background: #050505; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+        }
+
+        .map-mock-core { 
+            z-index: 2; 
+            text-align: center; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            color: var(--text-muted); 
+            letter-spacing: 2px;
+        }
+
+        /* --- PAGE 4: EVENEMENTS --- */
+        .events-timeline { 
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        .event-entry { 
+            display: grid; 
+            grid-template-columns: 150px 1fr auto; 
+            align-items: center; 
+            padding: 2.5rem 0; 
+            border-bottom: 1px solid var(--border); 
+            transition: border-color 0.3s ease; 
+        }
+
+        .event-entry:hover { 
+            border-color: var(--border-hover); 
+        }
+
+        .ev-date { 
+            font-size: 1.1rem; 
+            font-weight: 800; 
+        }
+
+        .ev-meta h3 { 
+            font-size: 2.5rem; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+        }
+
+        .ev-meta p { 
+            color: var(--text-muted); 
+            font-size: 0.9rem; 
+        }
+
+        /* --- PAGE 5: CONTACT --- */
+        .contact-container { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 4rem; 
+        }
+
+        .contact-info h3 { 
+            font-size: 2rem; 
+            text-transform: uppercase; 
+            font-weight: 800; 
+            margin-bottom: 1rem; 
+        }
+
+        .contact-info p { 
+            color: var(--text-muted); 
+            max-width: 400px; 
+            margin-bottom: 2rem; 
+        }
+
+        /* --- PAGE 6: SHOP --- */
+        .shop-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 3rem; 
+        }
+
+        .product-card { 
+            display: flex; 
+            flex-direction: column; 
+            border: 1px solid var(--border); 
+            transition: border-color 0.3s ease; 
+        }
+
+        .product-card:hover { 
+            border-color: var(--border-hover); 
+        }
+
+        .product-image { 
+            height: 300px; 
+            background: #111; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--text-muted); 
+            border-bottom: 1px solid var(--border); 
+        }
+
+        .product-info { 
+            padding: 1.5rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+        }
+
+        .product-name { 
+            font-size: 1.1rem; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+        }
+
+        .product-price { 
+            font-weight: 900; 
+            color: var(--text-muted); 
+            font-size: 1.2rem; 
+        }
+
+        .btn-add { 
+            width: 100%; 
+            border: none; 
+            border-top: 1px solid var(--border); 
+            padding: 1rem; 
+            text-align: center; 
+            cursor: pointer; 
+            background: transparent; 
+            color: var(--text); 
+            text-transform: uppercase; 
+            font-weight: 800; 
+            transition: all 0.3s; 
+        }
+
+        .btn-add:hover { 
+            background: var(--text); 
+            color: var(--bg); 
+        }
+
+        /* --- FORMS GLOBALS --- */
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 4rem; 
+        }
+
+        .form-container { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 2rem; 
+            width: 100%; 
+        }
+
+        .form-group { 
+            display: flex; 
+            flex-direction: column; 
+            position: relative; 
+        }
+
+        .form-group label { 
+            text-transform: uppercase; 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            color: var(--text-muted); 
+            margin-bottom: 0.5rem; 
+        }
+
+        .form-group input, .form-group textarea { 
+            background: transparent; 
+            border: none; 
+            border-bottom: 1px solid var(--border); 
+            color: var(--text); 
+            padding: 0.75rem 0; 
+            font-size: 1rem; 
+            transition: border-color 0.3s; 
+            font-family: var(--font); 
+        }
+
+        .form-group input:focus, .form-group textarea:focus { 
+            border-bottom-color: var(--border-hover); 
+        }
+
+        /* --- CART TABLE --- */
+        .cart-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-bottom: 3rem; 
+        }
+
+        .cart-table th { 
+            text-align: left; 
+            padding: 1rem 0; 
+            border-bottom: 2px solid var(--border); 
+            text-transform: uppercase; 
+            font-size: 0.8rem; 
+            color: var(--text-muted); 
+        }
+
+        .cart-table td { 
+            padding: 1.5rem 0; 
+            border-bottom: 1px solid var(--border); 
+            vertical-align: middle; 
+        }
+
+        .cart-item-name { 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            font-size: 1.1rem; 
+        }
+
+        .cart-item-price { 
+            font-weight: 700; 
+            font-variant-numeric: tabular-nums; 
+        }
+
+        .cart-remove { 
+            color: #ff3333; 
+            cursor: pointer; 
+            font-size: 0.8rem; 
+            text-transform: uppercase; 
+            font-weight: 700; 
+        }
+
+        .cart-summary { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 2rem 0; 
+            border-bottom: 2px solid var(--text); 
+            margin-bottom: 2rem; 
+        }
+
+        .cart-total { 
+            font-size: 2.5rem; 
+            font-weight: 900; 
+        }
+
+        /* --- BANNIÈRE VIDÉO YOUTUBE GLOBALE --- */
+        :root { 
+            --banner-height: 25vh; 
+        }
+
+        .global-banner { 
+            position: relative; 
+            margin-top: var(--header-height); 
+            width: 100vw; 
+            height: var(--banner-height); 
+            background: var(--bg); 
+            overflow: hidden; 
+            border-bottom: 2px solid var(--border); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .video-container { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            width: 100vw; 
+            height: 56.25vw; 
+            min-height: 100%; 
+            min-width: 177.77vh; 
+            z-index: 1; 
+            pointer-events: none; 
+            opacity: 0.4; 
+            filter: grayscale(100%) contrast(1.2); 
+        }
+
+        .video-container iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+        }
+
+        .banner-overlay { 
+            position: relative; 
+            z-index: 2; 
+            text-align: center; 
+        }
+
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 1024px) {
+            h1.section-title { font-size: 4rem; }
+            .spots-wrapper { grid-template-columns: 1fr; height: auto; }
+            .map-engine { height: 400px; }
+            .contact-container, .form-grid { grid-template-columns: 1fr; gap: 3rem; }
             .stats-bar { grid-template-columns: 1fr; }
             .stat-box { border-right: none; border-bottom: 1px solid var(--border); }
             .stat-box:last-child { border-bottom: none; }
             .split-grid { grid-template-columns: 1fr; gap: 3rem; }
             .community-cta div { flex-direction: column; }
-        }
-        
-        /* --- STYLES SECTION TUTORIELS (MANIFESTO & YOUTUBE) --- */
-        .tutos-manifesto {
-            border: 1px solid var(--border);
-            padding: 3rem;
-            margin-bottom: 4rem;
-            background: #050505;
-        }
-        .manifesto-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-        .manifesto-header h3 { font-size: 1.5rem; text-transform: uppercase; font-weight: 900; letter-spacing: 1px; }
-        .manifesto-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .manifesto-list li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
-        .manifesto-list strong { color: var(--text); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; display: block; margin-bottom: 0.2rem; }
-        .manifesto-footer { border-top: 1px solid var(--border); padding-top: 1.5rem; font-size: 0.85rem; color: #666; font-style: italic; }
-
-        .tutos-search-engine { margin-bottom: 2rem; }
-        .search-form { display: flex; gap: 1rem; width: 100%; }
-        .search-form input { flex: 1; background: transparent; border: none; border-bottom: 2px solid var(--border); color: var(--text); font-size: 1.5rem; padding: 1rem 0; font-family: var(--font); transition: border-color 0.3s ease; }
-        .search-form input:focus { border-bottom-color: var(--text); }
-
-        .tutos-filters { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 4rem; }
-        .filter-badge { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease; }
-        .filter-badge:hover, .filter-badge.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-
-        .tutos-video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem; }
-        .video-wrapper { display: flex; flex-direction: column; gap: 1rem; }
-        .youtube-container { position: relative; width: 100%; padding-bottom: 56.25%; background: #111; border: 1px solid var(--border); }
-        .youtube-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        .video-title { font-size: 1.1rem; font-weight: 800; text-transform: uppercase; line-height: 1.3; }
-        .video-tag { font-size: 0.7rem; color: var(--text-muted); font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
-
-        @media (max-width: 1024px) {
             .manifesto-list { grid-template-columns: 1fr; }
             .tutos-manifesto { padding: 2rem; }
-            .search-form { flex-direction: column; }
-            .search-form input { font-size: 1.2rem; }
-        }
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
+            nav ul { gap: 1rem; }
         }
 
-        .video-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #fff;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .video-card iframe {
-            width: 100%;
-            height: 200px;
+        @media (max-width: 768px) {
+            header { padding: 0 1.5rem; }
+            .burger { display: block; }
+            nav { 
+                position: fixed; 
+                top: 0; 
+                right: -100%; 
+                width: 100vw; 
+                height: 100vh; 
+                background: rgba(0, 0, 0, 0.95); 
+                backdrop-filter: blur(15px); 
+                display: flex; 
+                flex-direction: column; 
+                justify-content: center; 
+                align-items: center; 
+                transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+                z-index: 1500; 
+            }
+            nav.nav-active { right: 0; }
+            nav ul { flex-direction: column; gap: 2rem; text-align: center; }
+            nav a { font-size: 1.5rem; }
+            .page-view { padding: calc(var(--header-height) + 1.5rem) 1rem 2rem 1rem; } 
+            h1.section-title { font-size: 3rem; }
+            .cart-table th { display: none; }
+            .cart-table td { display: block; padding: 0.5rem 0; border: none; }
+            .cart-table tr { display: block; border-bottom: 1px solid var(--border); padding: 1rem 0; }
+            .cart-summary { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .event-entry { grid-template-columns: 1fr; gap: 1rem; align-items: flex-start; }
+            .event-entry .btn-core { width: 100%; text-align: center; }
+            
+            /* Ajustements spécifiques Tutos pour mobile */
+            .search-form-container input { font-size: 1rem; min-width: 100%; }
+            .search-form-container button { width: 100%; }
+            .tutos-filters { gap: 0.5rem; justify-content: center; }
+            .filter-badge { padding: 0.6rem 1rem; font-size: 0.65rem; width: 48%; text-align: center; } 
+            .video-grid-container { grid-template-columns: 1fr; gap: 2rem; } /* Force 1 seule colonne sur tel */
+            .global-banner { height: 20vh; }
         }
     </style>
 </head>
@@ -357,7 +844,7 @@
 
     <header>
         <a href="#accueil" class="logo">
-            <img src="https://via.placeholder.com/150x40/000000/FFFFFF?text=ALPHARUN" alt="Logo Officiel" class="logo-img">
+            <img src="logo blanc.png" alt="Logo Officiel" class="logo-img">
         </a>
         
         <nav id="nav-menu">
@@ -422,12 +909,10 @@
                     <h3>AlphaRun</h3>
                     <p>Bienvenue sur AlphaRun, le site officiel du parkour.</p>
                     <p>Ici, vous entrez dans un univers de liberté de mouvement, de dépassement de soi et de créativité urbaine. Que vous soyez débutant ou pratiquant confirmé, AlphaRun est là pour vous accompagner.</p>
-                    <p>Notre mission est simple : rendre le parkour accessible à tous grâce à un contenu de qualité. Vous trouverez ici des tutoriels, des conseils techniques, des vidéos, des actualités et des ressources pour progresser. Nous partageons également des spots, des événements et des témoignages de pratiquants.</p>
-                    <p>En tant que site officiel du parkour, AlphaRun promeut les valeurs essentielles de la discipline : liberté, fluidité, respect et maîtrise. Chaque semaine, du nouveau contenu est publié pour vous permettre de progresser à votre rythme tout en découvrant la richesse de cette culture urbaine.</p>
-                    <p>Rejoignez une communauté passionnée, motivée et soudée qui considère la ville comme un terrain de jeu sans limites.</p>
+                    <p>Notre mission est simple : rendre le parkour accessible à tous grâce à un contenu de qualité. Vous trouverez ici des tutoriels, des conseils techniques, des vidéos, des actualités et des ressources pour progresser.</p>
+                    <p>En tant que site officiel du parkour, AlphaRun promeut les valeurs essentielles de la discipline : liberté, fluidité, respect et maîtrise. Chaque semaine, du nouveau contenu est publié pour vous permettre de progresser à votre rythme.</p>
                     <p style="color: var(--text); font-weight: 800; margin-top: 2rem;">AlphaRun est plus qu'un site : c'est votre nouveau point de départ.</p>
                 </div>
-                
                 <div class="split-image">
                     <img src="https://images.unsplash.com/photo-1541257710737-06d667133a53?q=80&w=1000&auto=format&fit=crop" alt="Traceur urbain AlphaRun">
                 </div>
@@ -447,72 +932,62 @@
     <main id="tutos" class="page-view">
         <h1 class="section-title">Tutoriels</h1>
 
-        <div class="tutos-manifesto" style="border: 1px solid var(--border); padding: 3rem; margin-bottom: 4rem; background: #050505;">
-            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+        <div class="tutos-manifesto">
+            <div class="manifesto-header">
                 <span style="font-size: 1.5rem;">⚠️</span>
-                <h3 style="font-size: 1.5rem; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;">Note de l'Éditeur</h3>
+                <h3>Note de l'Éditeur</h3>
             </div>
             <p style="color: var(--text-muted); line-height: 1.6;">Cette section regroupe une sélection de vidéos tutoriels issues de YouTube, choisies pour leur qualité et leur clarté. Tous les contenus sont classés par thématique et niveau, afin de t’aider à progresser étape par étape, quel que soit ton profil.</p>
             
             <div style="margin: 2rem 0;">
                 <p style="text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 1rem;">Voici les catégories disponibles :</p>
-                <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Débutant :</strong> Les bases du parkour pour apprendre les fondamentaux (rolls, sauts, équilibre, etc.) en toute sécurité.</li>
-                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Intermédiaire :</strong> Des techniques plus avancées et des enchaînements pour gagner en fluidité et en maîtrise.</li>
-                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Confirmé :</strong> Des mouvements complexes, des combinaisons techniques et du travail de précision.</li>
-                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Freerun :</strong> Axé sur l’aspect acrobatique et esthétique du mouvement (flips, twists, combos stylisés).</li>
-                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Freerun Variant :</strong> Variantes créatives, mouvements hybrides et enchaînements personnels.</li>
-                    <li style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;"><strong style="color: var(--text); text-transform: uppercase; display: block;">Sécurité :</strong> Conseils et exercices pour s’échauffer, prévenir les blessures et améliorer la réception.</li>
+                <ul class="manifesto-list">
+                    <li><strong>Débutant :</strong> Les bases du parkour pour apprendre les fondamentaux.</li>
+                    <li><strong>Intermédiaire :</strong> Des techniques plus avancées et des enchaînements.</li>
+                    <li><strong>Confirmé :</strong> Des mouvements complexes et du travail de précision.</li>
+                    <li><strong>Freerun :</strong> Axé sur l’aspect acrobatique et esthétique.</li>
+                    <li><strong>Freerun Variant :</strong> Variantes créatives et mouvements hybrides.</li>
+                    <li><strong>Sécurité :</strong> Conseils et exercices pour prévenir les blessures.</li>
                 </ul>
             </div>
-
-            <div style="border-top: 1px solid var(--border); padding-top: 1.5rem; font-size: 0.85rem; color: #666; font-style: italic;">
-                Ces tutoriels ne sont pas réalisés par nous, mais par des traceurs et créateurs de contenu passionnés. Notre but est de regrouper le meilleur du web, de manière claire et structurée. La section est régulièrement mise à jour.
-            </div>
         </div>
 
-        <div style="margin-bottom: 2rem;">
-            <form onsubmit="event.preventDefault(); executerRechercheTuto();" style="display: flex; gap: 1rem; width: 100%; align-items: center; flex-wrap: wrap;">
-                <select id="lang-selector" onchange="changerLangue()" style="background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 1rem; font-family: var(--font); font-weight: 800; text-transform: uppercase; font-size: 1rem; outline: none; cursor: pointer;">
-                    <option value="fr">🇫🇷 FR</option>
-                    <option value="en">🇬🇧 EN</option>
-                    <option value="es">🇪🇸 ES</option>
-                    <option value="ru">🇷🇺 RU</option>
-                </select>
-                
-                <input type="text" id="search-tuto-input" placeholder="Rechercher une technique (ex: Saut, Costal, Flip)..." autocomplete="off" onkeyup="executerRechercheTuto()" style="flex: 1; min-width: 200px; background: transparent; border: none; border-bottom: 2px solid var(--border); color: var(--text); font-size: 1.2rem; padding: 1rem 0; font-family: var(--font); transition: border-color 0.3s ease;">
-                <button type="submit" class="btn-core">Rechercher</button>
-            </form>
+        <form onsubmit="event.preventDefault(); executerRechercheTuto();" class="search-form-container">
+            <input type="text" id="search-tuto-input" placeholder="Rechercher une technique (ex: Saut, Costal, Flip)..." autocomplete="off" onkeyup="executerRechercheTuto()">
+            <button type="submit" class="btn-core">Rechercher</button>
+        </form>
+
+        <div class="tutos-filters">
+            <button class="filter-badge active" onclick="filtrerTutos('all')">Tout</button>
+            <button class="filter-badge" onclick="filtrerTutos('debutant')">Débutant</button>
+            <button class="filter-badge" onclick="filtrerTutos('intermediaire')">Intermédiaire</button>
+            <button class="filter-badge" onclick="filtrerTutos('confirme')">Confirmé</button>
+            <button class="filter-badge" onclick="filtrerTutos('freerun')">Freerun</button>
+            <button class="filter-badge" onclick="filtrerTutos('variant')">Variant</button>
+            <button class="filter-badge" onclick="filtrerTutos('securite')">Sécurité</button>
         </div>
 
-        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 4rem;">
-            <button class="filter-badge active" onclick="filtrerTutos('all')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Tout</button>
-            <button class="filter-badge" onclick="filtrerTutos('debutant')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Débutant</button>
-            <button class="filter-badge" onclick="filtrerTutos('intermediaire')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Intermédiaire</button>
-            <button class="filter-badge" onclick="filtrerTutos('confirme')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Confirmé</button>
-            <button class="filter-badge" onclick="filtrerTutos('freerun')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Freerun</button>
-            <button class="filter-badge" onclick="filtrerTutos('variant')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Freerun Variant</button>
-            <button class="filter-badge" onclick="filtrerTutos('securite')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1.5rem; text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer;">Sécurité</button>
+        <div id="video-grid" class="video-grid-container"></div>
+        
+        <div id="load-more-container" style="text-align: center; margin-top: 3rem; display: none;">
+            <button class="btn-core btn-outline" onclick="afficherPlusDeVideos()">Voir plus de tutos</button>
         </div>
-
-        <div id="video-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem;"></div>
     </main>
 
-    <main id="spots" class="page-view">
+<main id="spots" class="page-view">
         <h1 class="section-title">Spots</h1>
         <div class="spots-wrapper">
-            <div class="spots-sidebar">
-                <div class="spot-node">
-                    <h3>Le Spot des Quais</h3>
-                    <p>Murs en béton brut de hauteurs variées, barres de raccordement idéales pour les lachés.</p>
+            <div class="spots-sidebar" id="liste-spots">
                 </div>
-                <div class="spot-node">
-                    <h3>Esplanade Centrale</h3>
-                    <p>Gros gaps de marches, murets inclinés en pierre lisse. Parfait pour les lignes fluides.</p>
+            
+            <div class="map-engine" style="display: flex; flex-direction: column; overflow: hidden; padding: 0; background: #050505;">
+                <iframe id="umap-iframe" style="width: 100%; height: 100%; min-height: 400px; border: 0; flex-grow: 1;" allowfullscreen allow="geolocation" src="https://umap.openstreetmap.fr/fr/map/spots-de-parkour_1422293?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true"></iframe>
+                
+                <div style="text-align: center; padding: 12px; background: #111; border-top: 1px solid var(--border);">
+                    <a id="umap-fullscreen-link" href="https://umap.openstreetmap.fr/fr/map/spots-de-parkour_1422293?scaleControl=false&miniMap=false&scrollWheelZoom=true&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true" target="_blank" style="color: var(--text-muted); text-decoration: none; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s ease;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">
+                        ↗ Voir en plein écran
+                    </a>
                 </div>
-            </div>
-            <div class="map-engine">
-                <div class="map-mock-core">[ ALPHARUN MAP CORE ENGINE v1.0 ]</div>
             </div>
         </div>
     </main>
@@ -528,21 +1003,12 @@
                 </div>
                 <a href="#" class="btn-core">S'inscrire</a>
             </div>
-            <div class="event-entry">
-                <div class="ev-date">03.10.26</div>
-                <div class="ev-meta">
-                    <h3>AlphaRun Jam Nationale</h3>
-                    <p>Rassemblement massif de la communauté. Ateliers pro, sessions libres et détection de talents.</p>
-                </div>
-                <a href="#" class="btn-core">Rejoindre</a>
-            </div>
         </div>
     </main>
 
     <main id="shop" class="page-view">
         <h1 class="section-title">Équipement</h1>
         <p class="subtitle">L'arsenal officiel AlphaRun. Conçu pour le mouvement absolu.</p>
-        
         <div class="shop-grid">
             <div class="product-card">
                 <div class="product-image">[ Visuel Produit API ]</div>
@@ -565,28 +1031,23 @@
 
     <main id="panier" class="page-view">
         <h1 class="section-title">Panier</h1>
-        
         <div id="cart-empty-msg" style="display: none;">
             <p class="subtitle">Votre équipement est vide.</p>
             <a href="#shop" class="btn-core btn-outline">Retour au Shop</a>
         </div>
-
         <div id="cart-content">
             <table class="cart-table" id="cart-table-body"></table>
-            
             <div class="cart-summary">
                 <div style="text-transform: uppercase; font-weight: 700; color: var(--text-muted);">Total (TTC)</div>
                 <div class="cart-total" id="cart-total-price">0.00 €</div>
             </div>
-
             <button class="btn-core" style="width: 100%; text-align: center; font-size: 1.2rem;" onclick="procederPaiementStripe()">Procéder au paiement sécurisé</button>
-            <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem;">Transaction chiffrée par Stripe. Redirection vers le terminal bancaire.</p>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem;">Transaction chiffrée par Stripe.</p>
         </div>
     </main>
 
     <main id="compte" class="page-view">
         <h1 class="section-title">Identification</h1>
-        
         <div class="form-grid">
             <div class="form-container">
                 <h3 style="font-size: 2rem; text-transform: uppercase; margin-bottom: 1rem;">Se connecter</h3>
@@ -601,16 +1062,10 @@
                     </div>
                     <button type="submit" class="btn-core" style="margin-top: 2rem;">Accéder au QG</button>
                 </form>
-                
-                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
-                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Vous avez passé une commande sans créer de compte ?</p>
-                    <a href="#suivi" class="btn-core btn-outline" style="padding: 0.8rem 1.5rem; font-size: 0.75rem;">Suivre ma commande</a>
-                </div>
             </div>
-
             <div class="form-container">
                 <h3 style="font-size: 2rem; text-transform: uppercase; margin-bottom: 1rem;">Créer un compte</h3>
-                <p style="color: var(--text-muted); margin-bottom: 2rem;">Gérez vos commandes, sauvegardez vos adresses et accédez à l'historique de vos transmissions.</p>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Gérez vos commandes et sauvegardez vos adresses.</p>
                 <form onsubmit="event.preventDefault(); alert('Création du profil...');">
                     <div class="form-group">
                         <label>Nom complet</label>
@@ -633,11 +1088,10 @@
     <main id="suivi" class="page-view">
         <h1 class="section-title">Suivi Logistique</h1>
         <p class="subtitle">Entrez votre numéro de transmission pour localiser votre équipement.</p>
-        
         <div class="form-container" style="max-width: 600px;">
             <form onsubmit="event.preventDefault(); trackerCommande();">
                 <div class="form-group">
-                    <label>Numéro de Commande (ex: ORD-90210)</label>
+                    <label>Numéro de Commande</label>
                     <input type="text" id="order-id" required style="font-size: 1.5rem; text-transform: uppercase;">
                 </div>
                 <div class="form-group" style="margin-top: 1.5rem;">
@@ -646,11 +1100,9 @@
                 </div>
                 <button type="submit" class="btn-core" style="margin-top: 2rem;">Localiser</button>
             </form>
-
             <div id="tracking-result" style="display: none; margin-top: 3rem; padding: 2rem; border: 1px solid var(--border); background: #050505;">
                 <h4 style="text-transform: uppercase; margin-bottom: 1rem; color: #4ade80;">Statut : En cours d'expédition</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Prise en charge par AliExpress Logistics. Remise au transporteur local en attente.</p>
-                <div style="margin-top: 1.5rem; font-weight: 700; letter-spacing: 1px;">Numéro de suivi postal : <span style="color: var(--text);">En attente de génération</span></div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Prise en charge par AliExpress Logistics.</p>
             </div>
         </div>
     </main>
@@ -677,37 +1129,35 @@
                 </div>
                 <div class="form-group">
                     <label>Message</label>
-                    <textarea rows="4" required style="background: transparent; border: none; border-bottom: 1px solid var(--border); color: var(--text); padding: 0.75rem 0; font-family: var(--font);"></textarea>
+                    <textarea rows="4" required></textarea>
                 </div>
                 <button type="submit" class="btn-core">Envoyer</button>
             </form>
         </div>
     </main>
 
-   <script>
+    <script>
         // --- 1. ROUTEUR SPA ---
         const AlphaRouter = {
             routes: ['#accueil', '#tutos', '#spots', '#evenements', '#shop', '#panier', '#compte', '#suivi', '#contact'],
             defaultRoute: '#accueil',
-
             init() {
                 window.addEventListener('hashchange', () => this.handleRoute());
                 if (!window.location.hash) window.location.hash = this.defaultRoute;
                 this.handleRoute(); 
             },
-
             handleRoute() {
                 let currentHash = window.location.hash;
                 if (!this.routes.includes(currentHash)) currentHash = this.defaultRoute;
-
+                
                 document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
                 const activeView = document.querySelector(currentHash);
                 if (activeView) activeView.classList.add('active');
-
+                
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.toggle('active', link.getAttribute('href') === currentHash);
                 });
-
+                
                 window.scrollTo(0, 0);
             }
         };
@@ -718,13 +1168,13 @@
                 const burger = document.getElementById('burger');
                 const nav = document.getElementById('nav-menu');
                 const navLinks = document.querySelectorAll('.nav-link');
-
+                
                 burger.addEventListener('click', () => {
                     nav.classList.toggle('nav-active');
                     burger.classList.toggle('toggle');
                     document.body.style.overflow = nav.classList.contains('nav-active') ? 'hidden' : 'auto';
                 });
-
+                
                 navLinks.forEach(link => {
                     link.addEventListener('click', () => {
                         nav.classList.remove('nav-active');
@@ -737,7 +1187,7 @@
 
         // --- 3. MOTEUR E-COMMERCE (PANIER) ---
         let panier = [];
-
+        
         function ajouterAuPanier(nom, prix) {
             const itemExistant = panier.find(item => item.name === nom);
             if (itemExistant) {
@@ -748,16 +1198,16 @@
             actualiserInterfacePanier();
             alert(`${nom} a été ajouté à votre équipement.`);
         }
-
+        
         function supprimerDuPanier(index) {
             panier.splice(index, 1);
             actualiserInterfacePanier();
         }
-
+        
         function actualiserInterfacePanier() {
             const totalItems = panier.reduce((sum, item) => sum + item.quantity, 0);
             document.getElementById('cart-count').innerText = totalItems;
-
+            
             const cartContent = document.getElementById('cart-content');
             const cartEmptyMsg = document.getElementById('cart-empty-msg');
             const tableBody = document.getElementById('cart-table-body');
@@ -767,17 +1217,16 @@
                 cartEmptyMsg.style.display = 'block';
                 return;
             }
-
+            
             cartContent.style.display = 'block';
             cartEmptyMsg.style.display = 'none';
-
+            
             let htmlTable = `<tr><th>Équipement</th><th>Prix U.</th><th>Qté</th><th>Total</th><th>Action</th></tr>`;
             let prixTotal = 0;
-
+            
             panier.forEach((item, index) => {
                 const totalLigne = item.price * item.quantity;
                 prixTotal += totalLigne;
-                
                 htmlTable += `
                     <tr>
                         <td class="cart-item-name">${item.name}</td>
@@ -788,51 +1237,42 @@
                     </tr>
                 `;
             });
-
+            
             tableBody.innerHTML = htmlTable;
             document.getElementById('cart-total-price').innerText = prixTotal.toFixed(2) + ' €';
         }
 
-        // --- 4. TRANSMISSION VERS LE SERVEUR RENDER ---
         async function procederPaiementStripe() {
             if (panier.length === 0) return;
-
             const btn = document.querySelector('#cart-content .btn-core');
             const texteOriginal = btn.innerText;
             btn.innerText = "Connexion sécurisée en cours...";
-
             try {
                const response = await fetch('https://alpharun-backend.onrender.com/api/creer-paiement', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'application/json' }, 
                     body: JSON.stringify({ items: panier })
                 });
-
                 if (!response.ok) throw new Error("Serveur injoignable");
-
                 const session = await response.json();
-                
-                if (session.url) {
-                    window.location.href = session.url; 
-                }
+                if (session.url) window.location.href = session.url; 
             } catch (error) {
-                console.error("Erreur Checkout:", error);
-                alert("Erreur: Le terminal de paiement est hors ligne. Assurez-vous que votre serveur Node.js est lancé.");
+                alert("Erreur: Le terminal de paiement est hors ligne.");
                 btn.innerText = texteOriginal; 
             }
         }
 
-        // --- 5. SIMULATION SUIVI DE COMMANDE ---
         function trackerCommande() {
             document.getElementById('tracking-result').style.display = 'block';
         }
 
-        // --- 6. MOTEUR DE TUTORIELS YOUTUBE (MULTILINGUE ET SANS CACHE) ---
+        // --- 6. MOTEUR DE TUTORIELS YOUTUBE (PAGINATION + LAZY LOAD) ---
         let allVideos = []; 
-        let currentLang = 'fr'; // Langue par défaut
-        let currentCat = 'all'; // Catégorie par défaut
+        let videosFiltres = []; 
+        let indexAffichage = 0; 
+        const VIDEOS_PAR_PAGE = 10; 
+        let currentCat = 'all'; 
 
-        // Récupération des vidéos depuis le serveur
         async function chargerVideos() {
             const grid = document.getElementById('video-grid');
             if(!grid) return;
@@ -840,62 +1280,14 @@
             grid.innerHTML = '<p style="color:var(--text-muted); grid-column: 1 / -1; text-align: center; font-size: 1.2rem;">Connexion au serveur... Chargement des tutos en cours...</p>';
 
             try {
-                // Le { cache: 'no-store' } est très important ici pour éviter les bugs d'affichage !
                 const response = await fetch('https://alpharun-backend.onrender.com/api/videos', { cache: 'no-store' });
                 allVideos = await response.json();
-                appliquerFiltresEtRecherche(); // Affiche avec les filtres par défaut
+                appliquerFiltresEtRecherche(); 
             } catch (error) {
-                console.error("Erreur de chargement des vidéos:", error);
-                grid.innerHTML = '<p style="color:#ff3333; grid-column: 1 / -1; text-align: center; font-weight: 800;">Erreur : Impossible de charger les vidéos depuis le serveur.</p>';
+                grid.innerHTML = '<p style="color:#ff3333; grid-column: 1 / -1; text-align: center; font-weight: 800;">Erreur de chargement des vidéos.</p>';
             }
         }
 
-        // Affichage des vidéos
-        function genererGrilleVideos(videosA_afficher) {
-            const grid = document.getElementById('video-grid');
-            if(!grid) return;
-            
-            grid.innerHTML = ''; 
-
-            if (videosA_afficher.length === 0) {
-                grid.innerHTML = '<p style="color: #ff3333; grid-column: 1 / -1; font-size: 1.2rem; font-weight: 800;">Aucun tutoriel trouvé pour cette recherche.</p>';
-                return;
-            }
-
-            videosA_afficher.forEach(video => {
-                let nomCat = video.categorie || 'debutant';
-                if(nomCat === "securite") nomCat = "Sécurité";
-                if(nomCat === "intermediaire") nomCat = "Intermédiaire";
-                if(nomCat === "confirme") nomCat = "Confirmé";
-                if(nomCat === "debutant") nomCat = "Débutant";
-                if(nomCat === "variant") nomCat = "Freerun Variant";
-                if(nomCat === "freerun") nomCat = "Freerun";
-
-                const videoHTML = `
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #111; border: 1px solid var(--border);">
-                            <iframe src="https://www.youtube.com/embed/${video.id}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
-                        </div>
-                        <div>
-                            <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">${nomCat}</span>
-                            <h4 style="font-size: 1.1rem; font-weight: 800; text-transform: uppercase; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${video.titre}</h4>
-                        </div>
-                    </div>
-                `;
-                grid.innerHTML += videoHTML;
-            });
-        }
-
-        // Action : Changement du sélecteur de langue
-        function changerLangue() {
-            const selectElement = document.getElementById('lang-selector');
-            if (selectElement) {
-                currentLang = selectElement.value;
-                appliquerFiltresEtRecherche();
-            }
-        }
-
-        // Action : Clic sur un bouton de catégorie
         function filtrerTutos(categorie) {
             currentCat = categorie;
             const boutons = document.querySelectorAll('.filter-badge');
@@ -909,52 +1301,166 @@
                 event.target.style.backgroundColor = 'var(--text)';
                 event.target.style.color = 'var(--bg)';
             }
-            
             appliquerFiltresEtRecherche();
         }
 
-        // Action : Live Search (Recherche en temps réel)
         function executerRechercheTuto(event) {
             if(event) event.preventDefault();
             appliquerFiltresEtRecherche();
         }
 
-        // LE MOTEUR DE MULTI-FILTRAGE CENTRAL (Insensible aux accents)
         function appliquerFiltresEtRecherche() {
-            // On récupère le texte, on le met en minuscule, et on enlève les accents
-            let requete = document.getElementById('search-tuto-input').value || '';
-            requete = requete.toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            let requete = (document.getElementById('search-tuto-input').value || '').toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-            const resultats = allVideos.filter(v => {
-                const videoLang = v.langue || 'fr';
-                
-                // 1. Validation de la langue choisie
-                const matchLangue = (videoLang === currentLang);
-                
-                // 2. Validation de la catégorie active
+            videosFiltres = allVideos.filter(v => {
                 const matchCat = (currentCat === 'all') ? true : (v.categorie === currentCat);
-                
-                // 3. Validation du mot-clé recherché (sans accents)
                 const titreNettoye = (v.titre || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 const catNettoye = (v.categorie || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                const matchTexte = (requete === "") ? true : (titreNettoye.includes(requete) || catNettoye.includes(requete));
                 
-                const matchTexte = (requete === "") ? true : (
-                    titreNettoye.includes(requete) || catNettoye.includes(requete)
-                );
-
-                return matchLangue && matchCat && matchTexte;
+                return matchCat && matchTexte;
             });
 
-            genererGrilleVideos(resultats);
+            indexAffichage = 0;
+            document.getElementById('video-grid').innerHTML = '';
+            afficherPlusDeVideos();
         }
 
-        // --- INITIALISATION GLOBALE ---
+        function afficherPlusDeVideos() {
+            const grid = document.getElementById('video-grid');
+            const btnLoadMore = document.getElementById('load-more-container');
+
+            if (videosFiltres.length === 0 && indexAffichage === 0) {
+                grid.innerHTML = '<p style="color: #ff3333; grid-column: 1 / -1; font-size: 1.2rem; font-weight: 800; text-align: center;">Aucun tutoriel trouvé pour cette recherche.</p>';
+                btnLoadMore.style.display = 'none';
+                return;
+            }
+
+            const prochainesVideos = videosFiltres.slice(indexAffichage, indexAffichage + VIDEOS_PAR_PAGE);
+
+            prochainesVideos.forEach(video => {
+                let nomCat = video.categorie || 'debutant';
+                if(nomCat === "securite") nomCat = "Sécurité";
+                if(nomCat === "intermediaire") nomCat = "Intermédiaire";
+                if(nomCat === "confirme") nomCat = "Confirmé";
+                if(nomCat === "debutant") nomCat = "Débutant";
+                if(nomCat === "variant") nomCat = "Freerun Variant";
+                if(nomCat === "freerun") nomCat = "Freerun";
+
+                const videoHTML = `
+                    <div class="video-card-item">
+                        <div class="video-card-iframe-wrapper">
+                            <iframe src="https://www.youtube.com/embed/${video.id}" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">${nomCat}</span>
+                            <h4 style="font-size: 1.1rem; font-weight: 800; text-transform: uppercase; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${video.titre}</h4>
+                        </div>
+                    </div>
+                `;
+                
+                grid.insertAdjacentHTML('beforeend', videoHTML);
+            });
+
+            indexAffichage += prochainesVideos.length;
+
+            if (indexAffichage >= videosFiltres.length) {
+                btnLoadMore.style.display = 'none';
+            } else {
+                btnLoadMore.style.display = 'block';
+            }
+        }
+// --- 7. MOTEUR DE CARTE INTERACTIVE (VIA FICHIER UMAP) ---
+        async function chargerSpots() {
+            const container = document.getElementById('liste-spots');
+            if (!container) return;
+            
+            container.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding: 2rem;">Extraction des spots en cours...</p>';
+
+            try {
+                // Lit ton fichier de sauvegarde directement sur ton serveur
+                const response = await fetch('umap_backup_spots-de-parkour.umap');
+                const data = await response.json();
+                
+                container.innerHTML = ''; 
+                let tousLesSpots = [];
+
+                if (data.layers) {
+                    data.layers.forEach(layer => {
+                        if (layer.features) {
+                            layer.features.forEach(feature => {
+                                if (feature.geometry && feature.geometry.type === "Point") {
+                                    const lng = feature.geometry.coordinates[0];
+                                    const lat = feature.geometry.coordinates[1];
+                                    const nomSpot = feature.properties.name || "Spot sans nom";
+                                    
+                                    let desc = feature.properties.description || "";
+                                    desc = desc.replace(/(<([^>]+)>)/gi, " ").substring(0, 90); 
+                                    if(desc.trim().length === 0) desc = "Clique pour voir les détails sur la carte.";
+                                    
+                                    tousLesSpots.push({ nom: nomSpot, desc: desc, lat: lat, lng: lng, zoom: 18 });
+                                }
+                            });
+                        }
+                    });
+                }
+
+                // Tri alphabétique
+                tousLesSpots.sort((a, b) => a.nom.localeCompare(b.nom));
+
+                if (tousLesSpots.length === 0) {
+                    container.innerHTML = '<p style="color:#ff3333; text-align:center; padding: 2rem;">Aucun spot trouvé dans le fichier.</p>';
+                    return;
+                }
+
+                // Affiche la liste des spots
+                tousLesSpots.forEach(spot => {
+                    const spotDiv = document.createElement('div');
+                    spotDiv.className = 'spot-node';
+                    spotDiv.style.borderLeft = "3px solid transparent";
+                    
+                    spotDiv.innerHTML = `
+                        <h3>${spot.nom}</h3>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">${spot.desc}...</p>
+                    `;
+                    
+                    spotDiv.onclick = () => focusSurSpot(spot.lat, spot.lng, spot.zoom, spotDiv);
+                    container.appendChild(spotDiv);
+                });
+
+            } catch (error) {
+                console.error("Erreur Umap :", error);
+                container.innerHTML = '<p style="color:#ff3333; text-align:center; padding: 2rem;">❌ Erreur : Impossible de lire le fichier <b>umap_backup_spots-de-parkour.umap</b>. Assure-toi qu\'il est bien en ligne avec ton index.html.</p>';
+            }
+        }
+
+        function focusSurSpot(lat, lng, zoom, elementClique) {
+            document.querySelectorAll('.spot-node').forEach(node => {
+                node.style.borderLeft = "3px solid transparent";
+                node.style.background = "transparent";
+            });
+            elementClique.style.borderLeft = "3px solid var(--text)";
+            elementClique.style.background = "#0a0a0a";
+
+            // Envoi des coordonnées vers TA nouvelle carte 1422293
+            const baseUrl = "https://umap.openstreetmap.fr/fr/map/spots-de-parkour_1422293?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true";
+            document.getElementById('umap-iframe').src = `${baseUrl}#${zoom}/${lat}/${lng}`;
+            document.getElementById('umap-fullscreen-link').href = `https://umap.openstreetmap.fr/fr/map/spots-de-parkour_1422293#${zoom}/${lat}/${lng}`;
+            
+            if(window.innerWidth <= 1024) {
+                document.getElementById('umap-iframe').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+       // --- INITIALISATION GLOBALE ---
         document.addEventListener('DOMContentLoaded', () => {
             AlphaRouter.init();
             UIController.init();
             actualiserInterfacePanier();
-            chargerVideos(); // Récupération API au démarrage
+            chargerVideos(); 
+            chargerSpots(); // <-- Ajoute cette ligne ici
         });
-</script>
+    </script>
 </body>
 </html>
+
+
