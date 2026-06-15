@@ -976,18 +976,14 @@
 
 <main id="spots" class="page-view">
         <h1 class="section-title">Spots</h1>
-        <div class="spots-wrapper">
-            <div class="spots-sidebar" id="liste-spots">
-                </div>
+        
+        <div style="width: 100%; height: calc(100vh - 15rem); display: flex; flex-direction: column; overflow: hidden; background: #050505; border: 1px solid var(--border); border-radius: 8px;">
+            <iframe id="umap-iframe" style="width: 100%; height: 100%; min-height: 400px; border: 0; flex-grow: 1;" allowfullscreen allow="geolocation" src="https://umap.openstreetmap.fr/fr/map/spots-de-parkour_1422293?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true#6/46.500/2.200"></iframe>
             
-            <div class="map-engine" style="display: flex; flex-direction: column; overflow: hidden; padding: 0; background: #050505;">
-                <iframe id="umap-iframe" style="width: 100%; height: 100%; min-height: 400px; border: 0; flex-grow: 1;" allowfullscreen allow="geolocation" src="https://umap.openstreetmap.fr/fr/map/spots-de-parkour_1422293?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true"></iframe>
-                
-                <div style="text-align: center; padding: 12px; background: #111; border-top: 1px solid var(--border);">
-                    <a id="umap-fullscreen-link" href="https://umap.openstreetmap.fr/fr/map/spots-de-parkour_1422293?scaleControl=false&miniMap=false&scrollWheelZoom=true&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true" target="_blank" style="color: var(--text-muted); text-decoration: none; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s ease;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">
-                        ↗ Voir en plein écran
-                    </a>
-                </div>
+            <div style="text-align: center; padding: 12px; background: #111; border-top: 1px solid var(--border);">
+                <a id="umap-fullscreen-link" href="https://umap.openstreetmap.fr/fr/map/spots-de-parkour_1422293?scaleControl=false&miniMap=false&scrollWheelZoom=true&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true#6/46.500/2.200" target="_blank" style="color: var(--text-muted); text-decoration: none; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s ease;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">
+                    ↗ Voir en plein écran
+                </a>
             </div>
         </div>
     </main>
@@ -1370,87 +1366,7 @@
                 btnLoadMore.style.display = 'block';
             }
         }
-// --- 7. MOTEUR DE CARTE INTERACTIVE (VIA FICHIER UMAP) ---
-        async function chargerSpots() {
-            const container = document.getElementById('liste-spots');
-            if (!container) return;
-            
-            container.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding: 2rem;">Extraction des spots en cours...</p>';
 
-            try {
-                // Lit ton fichier de sauvegarde directement sur ton serveur
-                const response = await fetch('umap_backup_spots-de-parkour.umap');
-                const data = await response.json();
-                
-                container.innerHTML = ''; 
-                let tousLesSpots = [];
-
-                if (data.layers) {
-                    data.layers.forEach(layer => {
-                        if (layer.features) {
-                            layer.features.forEach(feature => {
-                                if (feature.geometry && feature.geometry.type === "Point") {
-                                    const lng = feature.geometry.coordinates[0];
-                                    const lat = feature.geometry.coordinates[1];
-                                    const nomSpot = feature.properties.name || "Spot sans nom";
-                                    
-                                    let desc = feature.properties.description || "";
-                                    desc = desc.replace(/(<([^>]+)>)/gi, " ").substring(0, 90); 
-                                    if(desc.trim().length === 0) desc = "Clique pour voir les détails sur la carte.";
-                                    
-                                    tousLesSpots.push({ nom: nomSpot, desc: desc, lat: lat, lng: lng, zoom: 18 });
-                                }
-                            });
-                        }
-                    });
-                }
-
-                // Tri alphabétique
-                tousLesSpots.sort((a, b) => a.nom.localeCompare(b.nom));
-
-                if (tousLesSpots.length === 0) {
-                    container.innerHTML = '<p style="color:#ff3333; text-align:center; padding: 2rem;">Aucun spot trouvé dans le fichier.</p>';
-                    return;
-                }
-
-                // Affiche la liste des spots
-                tousLesSpots.forEach(spot => {
-                    const spotDiv = document.createElement('div');
-                    spotDiv.className = 'spot-node';
-                    spotDiv.style.borderLeft = "3px solid transparent";
-                    
-                    spotDiv.innerHTML = `
-                        <h3>${spot.nom}</h3>
-                        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">${spot.desc}...</p>
-                    `;
-                    
-                    spotDiv.onclick = () => focusSurSpot(spot.lat, spot.lng, spot.zoom, spotDiv);
-                    container.appendChild(spotDiv);
-                });
-
-            } catch (error) {
-                console.error("Erreur Umap :", error);
-                container.innerHTML = '<p style="color:#ff3333; text-align:center; padding: 2rem;">❌ Erreur : Impossible de lire le fichier <b>umap_backup_spots-de-parkour.umap</b>. Assure-toi qu\'il est bien en ligne avec ton index.html.</p>';
-            }
-        }
-
-        function focusSurSpot(lat, lng, zoom, elementClique) {
-            document.querySelectorAll('.spot-node').forEach(node => {
-                node.style.borderLeft = "3px solid transparent";
-                node.style.background = "transparent";
-            });
-            elementClique.style.borderLeft = "3px solid var(--text)";
-            elementClique.style.background = "#0a0a0a";
-
-            // Envoi des coordonnées vers TA nouvelle carte 1422293
-            const baseUrl = "https://umap.openstreetmap.fr/fr/map/spots-de-parkour_1422293?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true";
-            document.getElementById('umap-iframe').src = `${baseUrl}#${zoom}/${lat}/${lng}`;
-            document.getElementById('umap-fullscreen-link').href = `https://umap.openstreetmap.fr/fr/map/spots-de-parkour_1422293#${zoom}/${lat}/${lng}`;
-            
-            if(window.innerWidth <= 1024) {
-                document.getElementById('umap-iframe').scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
        // --- INITIALISATION GLOBALE ---
         document.addEventListener('DOMContentLoaded', () => {
             AlphaRouter.init();
@@ -1462,5 +1378,3 @@
     </script>
 </body>
 </html>
-
-
