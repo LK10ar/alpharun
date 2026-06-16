@@ -93,18 +93,10 @@
             transition: all 0.3s ease; 
         }
 
-        /* --- MENU BURGER --- */
-        .burger { 
-            display: none; 
-            width: 32px; 
-            height: 20px; 
-            background: transparent; 
-            border: none; 
-            cursor: pointer; 
-            z-index: 2000; 
-            position: relative; 
-        }
-
+       /* --- MENU BURGER --- */
+        .burger { display: none; width: 32px; height: 20px; background: transparent; border: none; cursor: pointer; z-index: 2000; position: relative; }
+        
+        /* ⚡ C'est ici qu'on a accéléré la vitesse : 0.2s au lieu de 0.4s */
         .burger span { 
             display: block; 
             position: absolute; 
@@ -112,17 +104,16 @@
             height: 2px; 
             background: var(--text); 
             left: 0; 
-            transition: transform 0.4s var(--transition), opacity 0.3s ease; 
+            transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out; 
         }
-
+        
         .burger .line1 { top: 0; } 
         .burger .line2 { top: 9px; } 
         .burger .line3 { top: 18px; }
-
+        
         .burger.toggle .line1 { transform: translateY(9px) rotate(45deg); }
         .burger.toggle .line2 { opacity: 0; transform: scaleX(0); }
         .burger.toggle .line3 { transform: translateY(-9px) rotate(-45deg); }
-
         /* --- ROUTER VIEWS --- */
         .page-view { 
             display: none; 
