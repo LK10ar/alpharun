@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlphaRun | Core Engine</title>
+    <title>AlphaRun</title>
     <style>
         /* --- DESIGN SYSTEM & RESET --- */
         :root { 
@@ -738,7 +738,7 @@
         }
 
        /* --- BANNIÈRE VIDÉO YOUTUBE GLOBALE --- */
-    /* --- BANNIÈRE GIF GLOBALE --- */
+     /* --- BANNIÈRE VIDÉO YOUTUBE GLOBALE --- */
         :root { 
             --banner-height: 25vh; 
         }
@@ -748,17 +748,37 @@
             margin-top: var(--header-height); 
             width: 100vw; 
             height: var(--banner-height); 
-            background: #000; 
+            background: var(--bg); 
             overflow: hidden; 
             border-bottom: 2px solid var(--border); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
         }
 
-        .banner-gif {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Permet au GIF de bien remplir l'écran sans se déformer */
-            opacity: 0.8; /* Assombrit un peu pour le style */
-            pointer-events: none; /* Désactive les clics */
+        .video-container { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            width: 100vw; 
+            height: 56.25vw; 
+            min-height: 100%; 
+            min-width: 177.77vh; 
+            z-index: 1; 
+            opacity: 0.7; 
+            pointer-events: none; /* Désactive les clics sur la vidéo pour cacher le menu pause */
+        }
+
+        .video-container iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none;
+            /* 🪄 Zoom MINIMAL (1.02x) pour une qualité d'image parfaite */
+            transform: scale(1.02); 
         }
 
         /* --- RESPONSIVE MOBILE --- */
@@ -842,8 +862,15 @@
         </button>
     </header>
 
-<div class="global-banner">
-        <img src="header.gif" alt="AlphaRun Banner" class="banner-gif">
+  <div class="global-banner">
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/HD_AlFn5FK4?autoplay=1&mute=1&controls=0&disablekb=1&loop=1&playlist=HD_AlFn5FK4&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen>
+            </iframe>
+        </div>
     </div>
 
     <main id="accueil" class="page-view">
