@@ -816,6 +816,140 @@
                 height: 45px;
             }
         }
+        /* --- FOOTER GLOBAL --- */
+        .global-footer {
+            background: #050505;
+            border-top: 1px solid var(--border);
+            padding: 4rem 3rem 2rem 3rem;
+            margin-top: 4rem; 
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-brand h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 350px;
+        }
+
+        .footer-socials h3, .footer-newsletter h3 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            font-weight: 800;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            transition: color 0.3s ease;
+            width: fit-content;
+        }
+
+        .social-links a:hover {
+            color: var(--text);
+        }
+
+        .footer-newsletter p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.8rem 1rem;
+            font-family: var(--font);
+            font-size: 0.85rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--text);
+        }
+
+        .newsletter-form .btn-core {
+            padding: 0.8rem 1.5rem;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .legal-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .legal-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .legal-links a:hover {
+            color: var(--text);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 1024px) {
             h1.section-title { font-size: 4rem; }
@@ -869,6 +1003,66 @@
             .filter-badge { padding: 0.6rem 1rem; font-size: 0.65rem; width: 48%; text-align: center; } 
             .video-grid-container { grid-template-columns: 1fr; gap: 2rem; } /* Force 1 seule colonne sur tel */
             .global-banner { height: 20vh; }
+        /* Ajustements Footer Mobile */
+        .global-footer { padding: 3rem 1.5rem 1.5rem 1.5rem; }
+        .footer-content { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+        .footer-brand p { margin: 0 auto; }
+        .social-links { align-items: center; }
+        .newsletter-form { flex-direction: column; }
+        .footer-bottom { flex-direction: column; text-align: center; gap: 1.5rem; }
+        .legal-links { flex-direction: column; gap: 1rem; }
+        }
+       /* --- STYLES DES PAGES LÉGALES --- */
+        /* Centre le conteneur principal des 3 pages */
+        #mentions-legales, #cgu, #confidentialite {
+            align-items: center; 
+        }
+
+        /* Centre les gros titres et sous-titres */
+        #mentions-legales h1, #cgu h1, #confidentialite h1,
+        #cgu .subtitle {
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Centre le bloc de texte parfaitement */
+        .legal-content {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto 4rem auto; /* Le double 'auto' fait la magie du centrage */
+            text-align: left; /* Garde le texte à l'intérieur lisible */
+        }
+
+        .legal-content h3 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin: 2.5rem 0 1rem 0;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .legal-content p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-content strong {
+            color: var(--text);
+        }
+
+        .legal-content a {
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--text);
+            transition: opacity 0.3s;
+        }
+
+        .legal-content a:hover {
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -1218,39 +1412,228 @@
         </div>
     </main>
 
-    <main id="contact" class="page-view">
+  <main id="contact" class="page-view">
         <h1 class="section-title">Contact</h1>
         <div class="contact-container">
             <div class="contact-info">
                 <h3>Rejoins le mouvement</h3>
-                <p>Tu as un nouveau spot à indexer ou un partenariat à proposer ? Écris-nous.</p>
-                <div style="font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 2rem;">
-                    <div style="margin-bottom: 0.5rem;">HQ // bordeaux, france</div>
-                    <div style="color: var(--text-muted);">core@alpharun.com</div>
-                </div>
+                <p>Tu as un nouveau spot à indexer, une question sur un tuto, ou un partenariat à proposer ? Écris-nous directement.</p>
+                <br>
+                <p style="margin-bottom: 0.5rem;"><strong style="color: var(--text);">HQ //</strong> BORDEAUX, FRANCE</p>
+                <p><strong style="color: var(--text);">EMAIL //</strong> <a href="mailto:alpharun33@gmail.com" style="color: var(--text-muted); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">alpharun33@gmail.com</a></p>
             </div>
-            <form class="form-container" onsubmit="event.preventDefault(); alert('Transmission réussie.');">
-                <div class="form-group">
-                    <label>Nom / Pseudo</label>
-                    <input type="text" required>
-                </div>
-                <div class="form-group">
-                    <label>Adresse Email</label>
-                    <input type="email" required>
-                </div>
-                <div class="form-group">
-                    <label>Message</label>
-                    <textarea rows="4" required></textarea>
-                </div>
-                <button type="submit" class="btn-core">Envoyer</button>
-            </form>
+            
+            <div class="form-container">
+                <form action="https://formsubmit.co/alpharun33@gmail.com" method="POST" class="contact-form">
+                    
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="Nouveau message depuis AlphaRun !">
+                    <input type="hidden" name="_template" value="box">
+
+                    <div class="form-group">
+                        <label for="name">Nom / Pseudo</label>
+                        <input type="text" id="name" name="Nom" required placeholder="Ton blaze">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse Email</label>
+                        <input type="email" id="email" name="Email" required placeholder="Pour qu'on te réponde">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="Message" rows="5" required placeholder="Balance ton message..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-core">Envoyer le message</button>
+                </form>
+            </div>
         </div>
     </main>
+<main id="mentions-legales" class="page-view">
+        <h1 class="section-title" style="font-size: 4rem;">Mentions Légales</h1>
+            <p class="subtitle" style="text-align: center; width: 100%;">Date de mise à jour : 01 juillet 2026</p>    
+        <div class="legal-content">
+            <h3>1. Éditeur du site</h3>
+            <p>Le site <strong>alpha-run.com</strong> est édité par :<br>
+            Nom du responsable de publication : <strong>AlphaRun</strong><br>
+            Adresse : Bordeaux<br>
+            Email : <a href="mailto:alpharun33@gmail.com">alpharun33@gmail.com</a></p>
+
+            <h3>2. Hébergement</h3>
+            <p>Le site est hébergé par :<br>
+            Nom de l’hébergeur : <strong>OVH</strong><br>
+            Adresse : <a href="https://ovh.com" target="_blank">https://ovh.com</a><br>
+            Téléphone : 1007</p>
+
+            <h3>3. Propriété intellectuelle</h3>
+            <p>L’ensemble des éléments du site AlphaRun (<a href="https://alpha-run.com" target="_blank">https://alpha-run.com</a>) (textes, images, vidéos, graphismes, logo, design, etc.) sont protégés par les lois françaises et internationales relatives à la propriété intellectuelle.</p>
+            <p>Sauf indication contraire, ils sont la propriété exclusive de <strong>AlphaRun</strong>.</p>
+            <p>Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable.</p>
+
+            <h3>4. Données personnelles</h3>
+            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d’un droit d’accès, de rectification, de suppression et d’opposition concernant les données vous concernant.</p>
+            <p>Pour exercer ces droits, vous pouvez contacter : <a href="mailto:alpharun33@gmail.com">alpharun33@gmail.com</a></p>
+            <p>Le site peut collecter des données personnelles via :</p>
+            <ul style="color: var(--text-muted); margin-bottom: 1.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li>Formulaires de contact</li>
+                <li>Cookies (voir la section suivante)</li>
+            </ul>
+
+            <h3>5. Cookies</h3>
+            <p>Le site <strong>alpha-run.com</strong> utilise des cookies pour améliorer l’expérience utilisateur, mesurer l’audience et proposer des contenus adaptés.</p>
+            <p>En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies. Vous pouvez à tout moment modifier les paramètres de votre navigateur pour refuser les cookies.</p>
+
+            <h3>6. Responsabilité</h3>
+            <p>L’éditeur ne peut être tenu responsable des erreurs ou inexactitudes présentes sur le site, ni d’éventuels dommages résultant de son utilisation.</p>
+
+            <h3>7. Droit applicable et juridiction compétente</h3>
+            <p>Les présentes mentions légales sont régies par le droit français.</p>
+            <p>En cas de litige, et après une tentative de résolution amiable, les tribunaux français seront seuls compétents pour régler le différend.</p>
+        </div>
+    </main>
+
+  <main id="cgu" class="page-view">
+        <h1 class="section-title" style="font-size: 4rem;">CGU</h1>
+        <p class="subtitle" style="text-align: center; width: 100%;">Date de mise à jour : 01 juillet 2026</p>
+        
+        <div class="legal-content">
+            <p>Les présentes Conditions Générales d’Utilisation (CGU) ont pour objet de définir les modalités et conditions d’accès et d’utilisation du site <strong>alpha-run.com</strong>.</p>
+            <p>En accédant au site, l’utilisateur accepte sans réserve les présentes CGU.</p>
+
+            <h3>1. Objet</h3>
+            <p>Les présentes Conditions Générales d’Utilisation (CGU) ont pour objet de définir les modalités et conditions d’accès et d’utilisation du site alpha-run.com.</p>
+            <p>En accédant au site, l’utilisateur accepte sans réserve les présentes CGU.</p>
+
+            <h3>2. Accès au site</h3>
+            <p>Le site est accessible gratuitement à tout utilisateur disposant d’un accès à Internet. Tous les frais liés à l’accès au site (matériel informatique, connexion Internet, etc.) sont à la charge de l’utilisateur.</p>
+            <p>Certaines sections du site peuvent être restreintes ou nécessiter une inscription.</p>
+
+            <h3>3. Propriété intellectuelle</h3>
+            <p>Le contenu du site alpha-run.com (textes, images, vidéos, logos, graphismes, etc.) est protégé par les lois relatives à la propriété intellectuelle.</p>
+            <p>Toute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, est strictement interdite sans l’autorisation écrite préalable de l’éditeur.</p>
+
+            <h3>4. Comportement des utilisateurs</h3>
+            <p>L’utilisateur s’engage à utiliser le site dans le respect de la loi, des bonnes mœurs, et des présentes CGU.</p>
+            <p>Il est interdit notamment de :</p>
+            <ul style="color: var(--text-muted); margin-bottom: 1.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li>Publier des contenus diffamatoires, offensants, violents ou illégaux ;</li>
+                <li>Tenter d’accéder au site ou à des sections protégées sans autorisation ;</li>
+                <li>Perturber le bon fonctionnement du site (ex : spam, piratage, etc.).</li>
+            </ul>
+            <p>L’éditeur se réserve le droit de supprimer tout contenu ou compte utilisateur ne respectant pas ces règles.</p>
+
+            <h3>5. Responsabilités</h3>
+            <p>L’éditeur du site met en œuvre tous les moyens raisonnables pour assurer l’exactitude et la mise à jour des informations publiées. Cependant, il ne peut garantir l’absence d’erreurs ou d’omissions.</p>
+            <p>L’utilisateur utilise le site à ses propres risques. L’éditeur ne pourra être tenu responsable de dommages directs ou indirects résultant de l’utilisation du site ou de l’impossibilité d’y accéder.</p>
+
+            <h3>6. Liens externes</h3>
+            <p>Le site peut contenir des liens vers d’autres sites web. Ces liens sont fournis à titre informatif. L’éditeur n’a aucun contrôle sur leur contenu et décline toute responsabilité quant aux informations ou services qu’ils proposent.</p>
+
+            <h3>7. Données personnelles</h3>
+            <p>La collecte et le traitement des données personnelles sont effectués dans le respect du Règlement Général sur la Protection des Données (RGPD).</p>
+            <p>Voir notre <a href="#confidentialite" style="color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text);">Politique de confidentialité</a> pour plus d’informations.</p>
+
+            <h3>8. Modification des CGU</h3>
+            <p>Les présentes CGU peuvent être modifiées à tout moment. L’utilisateur est invité à les consulter régulièrement.</p>
+
+            <h3>9. Droit applicable</h3>
+            <p>Les présentes CGU sont régies par le droit français. En cas de litige, les tribunaux français seront seuls compétents.</p>
+        </div>
+    </main>
+
+    <main id="confidentialite" class="page-view">
+        <h1 class="section-title" style="font-size: 4rem;">Confidentialité</h1>
+        <p class="subtitle" style="text-align: center; width: 100%;">Date de mise à jour : 01 juillet 2026</p>
+        
+        <div class="legal-content">
+            <p>La présente Politique de Confidentialité a pour but d’informer les utilisateurs du site AlphaRun (<a href="https://alpha-run.com" target="_blank">https://alpha-run.com</a>) sur la manière dont nous collectons, utilisons, stockons et protégeons leurs données personnelles.</p>
+
+            <h3>1. Responsable du traitement</h3>
+            <p>Le responsable du traitement des données est AlphaRun, joignable à l’adresse suivante : <a href="mailto:alpharun33@gmail.com">alpharun33@gmail.com</a></p>
+
+            <h3>2. Données personnelles collectées</h3>
+            <p>Nous pouvons collecter les types de données suivants :</p>
+            <ul style="color: var(--text-muted); margin-bottom: 1.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Informations d’identification :</strong> nom, prénom, adresse e-mail, etc.</li>
+                <li><strong>Données de navigation :</strong> adresse IP, type de navigateur, pages visitées, temps de visite, etc.</li>
+                <li><strong>Données fournies volontairement :</strong> via les formulaires de contact, les commentaires, les inscriptions à la newsletter, etc.</li>
+            </ul>
+
+            <h3>3. Finalité de la collecte</h3>
+            <p>Les données sont collectées pour :</p>
+            <ul style="color: var(--text-muted); margin-bottom: 1.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li>Répondre à vos demandes via le formulaire de contact.</li>
+                <li>Améliorer l’expérience utilisateur et le contenu du site.</li>
+                <li>Envoyer des newsletters et actualités si vous vous y êtes inscrit(e).</li>
+                <li>Assurer la sécurité et le bon fonctionnement du site.</li>
+            </ul>
+
+            <h3>4. Cookies</h3>
+            <p>Le site AlphaRun utilise des cookies pour améliorer la navigation et recueillir des statistiques anonymes. Vous pouvez gérer vos préférences de cookies via les paramètres de votre navigateur.</p>
+
+            <h3>5. Durée de conservation</h3>
+            <p>Vos données sont conservées pour une durée limitée, strictement nécessaire aux finalités pour lesquelles elles ont été collectées, et conformément aux obligations légales.</p>
+
+            <h3>6. Partage des données</h3>
+            <p>Les données collectées sont destinées exclusivement à AlphaRun. Elles ne sont en aucun cas vendues ni louées à des tiers. Elles peuvent toutefois être transmises à des prestataires techniques de confiance (hébergeur, outils d’emailing, etc.) dans le respect du RGPD.</p>
+
+            <h3>7. Vos droits</h3>
+            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :</p>
+            <ul style="color: var(--text-muted); margin-bottom: 1.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li>Droit d’accès, de rectification, d’opposition et de suppression de vos données.</li>
+                <li>Droit à la limitation du traitement.</li>
+                <li>Droit à la portabilité de vos données.</li>
+            </ul>
+            <p>Pour exercer vos droits, vous pouvez nous contacter à l’adresse suivante : <a href="mailto:alpharun33@gmail.com">alpharun33@gmail.com</a></p>
+
+            <h3>8. Sécurité</h3>
+            <p>Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données personnelles contre la perte, l’accès non autorisé ou la divulgation.</p>
+
+            <h3>9. Modifications</h3>
+            <p>Cette politique de confidentialité peut être mise à jour à tout moment. La date de la dernière mise à jour est indiquée en haut de la page.</p>
+        </div>
+    </main>
+    <footer class="global-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>ALPHARUN</h2>
+                <p>Explorez l’univers d’AlphaRun, du parkour et du freerunning. Retrouvez la carte ultime des spots, des tutos de pointe et l'actualité de la scène mondiale. Entre conseils, entraînements et inspiration : repoussez vos limites et transformez la ville en terrain de jeu.</p>
+            </div>
+
+            <div class="footer-socials">
+                <h3>Réseaux</h3>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@AlphaRun" target="_blank">YouTube</a>
+                    <a href="https://www.instagram.com/alpharun33/?hl=fr" target="_blank">Instagram</a>
+                    <a href="https://www.tiktok.com/@alpha_run" target="_blank">TikTok</a>
+                    <a href="https://x.com/alpha__run" target="_blank">X (Twitter)</a>
+                </div>
+            </div>
+
+            <div class="footer-newsletter">
+                <h3>Newsletter</h3>
+                <p>Reçois les nouveaux spots et les infos events directement dans ta boîte mail.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Ton adresse email" required>
+                    <button type="submit" class="btn-core btn-outline">S'abonner</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="legal-links">
+                <a href="#cgu">CGU</a>
+                <a href="#mentions-legales">Mentions Légales</a>
+                <a href="#confidentialite">Politique de Confidentialité</a>
+            </div>
+            <p class="copyright">&copy; 2026 AlphaRun. Tous droits réservés.</p>
+        </div>
+    </footer>
+
 <button id="scrollTopBtn" title="Retour en haut">↑</button>
     <script>
-        // --- 1. ROUTEUR SPA ---
+// --- 1. ROUTEUR SPA ---
         const AlphaRouter = {
-            routes: ['#accueil', '#tutos', '#spots', '#evenements', '#shop', '#panier', '#compte', '#suivi', '#contact'],
+            // AJOUT DES ROUTES LÉGALES À LA FIN DU TABLEAU
+            routes: ['#accueil', '#tutos', '#spots', '#evenements', '#shop', '#panier', '#compte', '#suivi', '#contact', '#cgu', '#mentions-legales', '#confidentialite'],
             defaultRoute: '#accueil',
             init() {
                 window.addEventListener('hashchange', () => this.handleRoute());
@@ -1269,7 +1652,7 @@
                     link.classList.toggle('active', link.getAttribute('href') === currentHash);
                 });
                 
-                window.scrollTo(0, 0);
+                window.scrollTo(0, 0); // Remonte tout en haut automatiquement à chaque changement de page
             }
         };
 
