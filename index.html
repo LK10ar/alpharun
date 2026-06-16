@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlphaRun</title>
+    <title>AlphaRun | Core Engine</title>
     <style>
         /* --- DESIGN SYSTEM & RESET --- */
         :root { 
@@ -749,22 +749,11 @@
             width: 100vw; 
             height: var(--banner-height); 
             background: var(--bg); 
-            overflow: hidden; /* Coupe tout ce qui dépasse */
+            overflow: hidden; 
             border-bottom: 2px solid var(--border); 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-        }
-
-        /* 🛡️ La vitre qui bloque 100% des interactions */
-        .glass-shield {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 10;
-            background: transparent;
         }
 
         .video-container { 
@@ -778,7 +767,7 @@
             min-width: 177.77vh; 
             z-index: 1; 
             opacity: 0.7; 
-            pointer-events: none; /* Désactive la souris sur la zone */
+            pointer-events: none; /* Désactive les clics sur la vidéo pour cacher le menu pause */
         }
 
         .video-container iframe { 
@@ -788,8 +777,8 @@
             width: 100%; 
             height: 100%; 
             pointer-events: none;
-            /* 🪄 Zoom ultra-agressif pour jeter les boutons hors de l'écran */
-            transform: scale(1.6); 
+            /* 🪄 Zoom MINIMAL (1.02x) pour une qualité d'image parfaite */
+            transform: scale(1.02); 
         }
 
         /* --- RESPONSIVE MOBILE --- */
