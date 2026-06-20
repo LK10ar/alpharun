@@ -1466,13 +1466,20 @@
                     const data = await res.json();
                     
                     if (res.ok) {
+                        // Succès
                         this.favorisLocaux = data.favoris;
                         this.afficher();
                         alert(`✔️ "${titre}" has been saved to your dashboard!`);
+                    } else if (res.status === 400) {
+                        // Doublon intercepté (pas d'erreur effrayante)
+                        console.warn("Info: " + data.error);
+                        alert(`ℹ️ "${titre}" is already in your favorites!`);
                     } else {
-                        alert(data.error);
+                        // Vraie erreur serveur
+                        alert("Error: " + (data.error || "Server issue"));
                     }
                 } catch (err) {
+                    console.error("Network handled:", err);
                     alert("Network error while adding to server.");
                 }
             },
@@ -1498,7 +1505,7 @@
                 }
             },
 
-           filtrerType(type) {
+            filtrerType(type) {
                 this.currentFilter = type;
                 ['ALL', 'TUTO', 'PRODUCT', 'EVENT', 'FORUM'].forEach(t => {
                     const btn = document.getElementById(`tab-fav-${t}`);
@@ -1691,6 +1698,6 @@
         scrollTopBtn.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
-    </script>
+</script>
 </body>
 </html>
