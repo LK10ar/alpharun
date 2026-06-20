@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlphaRun</title>
-  <style>
+    
+    <meta name="description" content="AlphaRun: Your central platform for Parkour and Freerunning. Find exclusive video tutorials, a worldwide spot map, the complete jam and competition schedule, and your urban tactical gear.">
+    <link rel="canonical" href="https://alpha-run.com/en/">
+
+    <link rel="alternate" hreflang="fr" href="https://alpha-run.com/" />
+    <link rel="alternate" hreflang="en" href="https://alpha-run.com/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://alpha-run.com/" />
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alpha-run.com/en/">
+    <meta property="og:title" content="AlphaRun">
+    <meta property="og:description" content="Tutorials, spots, worldwide events schedule and tactical gear.">
+    <meta property="og:image" content="https://alpha-run.com/vignette-partage.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AlphaRun">
+    <meta name="twitter:description" content="Tutorials, spots, worldwide events schedule and tactical gear.">
+    <meta name="twitter:image" content="https://alpha-run.com/vignette-partage.jpg">
+
+    <link rel="icon" type="image/png" href="logo blanc.png">
+
+    <style>
         /* --- DESIGN SYSTEM & RESET --- */
         :root { 
             --bg: #000000; 
@@ -403,6 +424,57 @@
             .community-cta div { flex-direction: column !important; align-items: center !important; width: 100% !important; }
             .community-cta div a { width: 100% !important; max-width: 300px !important; text-align: center !important; margin: 0 !important; }
         }
+        /* --- LIENS PARTENAIRES --- */
+        .partner-link { 
+            text-decoration: none; 
+            color: inherit; 
+        }
+        .partner-link:hover .partner-logo { 
+            color: var(--text); /* Reste fidèle à ton style au survol */
+        }
+     /* --- NOUVEAU DASHBOARD COMPTE (PRO, NOIR & BLANC) --- */
+        .dashboard-wrapper { max-width: 1200px; margin: 0 auto; width: 100%; }
+        .dashboard-grid { display: grid; grid-template-columns: 350px 1fr; gap: 2rem; align-items: start; }
+        
+        /* Widget d'Authentification */
+        .auth-widget { background: #0a0a0a; border-radius: 4px; border: 1px solid var(--border); overflow: hidden; }
+        .auth-tabs { display: flex; padding: 1rem 1rem 0 1rem; gap: 0.5rem; background: #000; border-bottom: 1px solid var(--border); }
+        .auth-tabs button { flex: 1; padding: 0.8rem; background: #111; color: var(--text-muted); border: 1px solid var(--border); border-bottom: none; border-radius: 4px 4px 0 0; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; transition: 0.3s; }
+        .auth-tabs button.active { background: #fff; color: #000; border-color: #fff; }
+        
+        .auth-body { padding: 2rem 1.5rem; }
+        .auth-body label { display: block; font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: var(--text-muted); margin-bottom: 0.5rem; letter-spacing: 1px; }
+        .auth-input { width: 100%; background: #000; border: 1px solid var(--border); color: #fff; padding: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; outline: none; transition: border-color 0.3s; }
+        .auth-input:focus { border-color: #fff; }
+        
+        .btn-bw { width: 100%; background: #fff; color: #000; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; padding: 1rem; border: none; cursor: pointer; font-size: 0.85rem; transition: opacity 0.3s; }
+        .btn-bw:hover { opacity: 0.8; }
+        .btn-dark { width: 100%; background: transparent; color: #fff; font-weight: 800; text-transform: uppercase; padding: 1rem; border: 1px solid var(--border); cursor: pointer; font-size: 0.85rem; transition: 0.3s; }
+        .btn-dark:hover { background: #fff; color: #000; }
+
+        /* Widgets Contenu (Suivi & Favoris) */
+        .panel-widget { background: #0a0a0a; border: 1px solid var(--border); padding: 2rem; margin-bottom: 2rem; }
+        .panel-header { font-size: 1.2rem; text-transform: uppercase; font-weight: 900; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; color: #fff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        
+        .fav-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .fav-filters button { background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 6px 10px; font-size: 0.7rem; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+        .fav-filters button.active, .fav-filters button:hover { color: #fff; border-color: #fff; }
+
+        .compact-form { display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap; }
+        .compact-form .form-group-pro { margin: 0; flex: 1; min-width: 200px; }
+        .compact-form .btn-core { padding: 1rem 1.5rem; height: 50px; margin-top: 0; border: 1px solid #fff; background: #fff; color: #000; }
+        .compact-form .btn-core:hover { background: #000; color: #fff; }
+        .compact-form input { height: 50px; padding: 0.5rem 1rem; }
+
+        /* Mobile Responsive */
+        @media(max-width: 900px) {
+            .dashboard-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .auth-widget, .panel-widget { padding: 1rem; margin-bottom: 0; }
+            .auth-body { padding: 1.5rem 1rem; }
+            .compact-form { flex-direction: column; align-items: stretch; }
+            .compact-form .btn-core { width: 100%; }
+            .panel-header { flex-direction: column; align-items: flex-start; }
+        }
 </style>
 </head>
 <body>
@@ -412,13 +484,14 @@
             <img src="logo blanc.png" alt="Logo Officiel" class="logo-img">
         </a>
         
-       <nav id="nav-menu">
+      <nav id="nav-menu">
             <ul>
                 <li><a href="#accueil" class="nav-link">Accueil</a></li>
                 <li><a href="#tutos" class="nav-link">Tutos</a></li>
                 <li><a href="#spots" class="nav-link">Spots</a></li>
                 <li><a href="#evenements" class="nav-link">Events</a></li>
                 <li><a href="#shop" class="nav-link">Shop</a></li>
+                <li><a href="#forum" class="nav-link">Forum</a></li>
                 <li><a href="#compte" class="nav-link">Compte</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
@@ -554,12 +627,14 @@
         <div class="home-section partners-section">
             <p class="partners-title">ILS SOUTIENNENT LE MOUVEMENT</p>
             <div class="partners-grid">
-                <span class="partner-logo">FARANG</span>
-                <span class="partner-logo">STORROR</span>
-                <span class="partner-logo">WFPF</span>
-                <span class="partner-logo">ETRE FORT</span>
+                <a href="https://teamfarang.com/fr-eu" target="_blank" class="partner-link"><span class="partner-logo">FARANG</span></a>
+            <a href="https://storror.com" target="_blank" class="partner-link"><span class="partner-logo">STORROR</span></a>
+                <a href="https://wfpf.com" target="_blank" class="partner-link"><span class="partner-logo">WFPF</span></a>
+                <a href="https://kimeo.net/" target="_blank" class="partner-link"><span class="partner-logo">KIMEO</span></a>         </div>
+                    <a href="https://frenchfreerunacademy.com/" target="_blank" class="partner-link"><span class="partner-logo">FFAC</span></a>         
+                </div>
+
             </div>
-        </div>
 
         <div class="community-cta"> 
             <h2>PRÊT À FRANCHIR LE MUR ?</h2> 
@@ -815,75 +890,134 @@
         </div>
     </main>
 
-    <main id="panier" class="page-view">
-        <h1 class="section-title">Panier</h1>
-        <div id="cart-empty-msg" style="display: none;">
-            <p class="subtitle">Votre équipement est vide.</p>
-            <a href="#shop" class="btn-core btn-outline">Retour au Shop</a>
-        </div>
-        <div id="cart-content">
-            <table class="cart-table" id="cart-table-body"></table>
-            <div class="cart-summary">
-                <div style="text-transform: uppercase; font-weight: 700; color: var(--text-muted);">Total (TTC)</div>
-                <div class="cart-total" id="cart-total-price">0.00 €</div>
+    <main id="forum" class="page-view">
+        <h1 class="section-title">Forum AlphaRun</h1>
+        <p class="subtitle">Rejoins la discussion. Partage tes tricks, trouve des spots et échange avec la communauté.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            
+            <div class="pro-card">
+                <div class="pro-card-content" style="padding: 2rem;">
+                    <span class="tag-pro border-tag" style="margin-bottom: 1rem;">Général</span>
+                    <h4 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 1rem;">Discussions Générales</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.5;">L'endroit pour parler de tout et de rien autour de la culture Parkour, Freerun et Art du Déplacement.</p>
+                    <a href="#" class="btn-core btn-outline" style="width: 100%; text-align: center;">Entrer</a>
+                </div>
             </div>
-            <button class="btn-core" style="width: 100%; text-align: center; font-size: 1.2rem;" onclick="procederPaiementStripe()">Procéder au paiement sécurisé</button>
-            <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem;">Transaction chiffrée par Stripe.</p>
+
+            <div class="pro-card">
+                <div class="pro-card-content" style="padding: 2rem;">
+                    <span class="tag-pro border-tag" style="margin-bottom: 1rem;">Technique</span>
+                    <h4 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 1rem;">Entraînement & Tutos</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.5;">Bloqué sur un mouvement ? Demande des conseils à la communauté ou partage tes propres astuces de pro.</p>
+                    <a href="#" class="btn-core btn-outline" style="width: 100%; text-align: center;">Entrer</a>
+                </div>
+            </div>
+
+            <div class="pro-card">
+                <div class="pro-card-content" style="padding: 2rem;">
+                    <span class="tag-pro border-tag" style="margin-bottom: 1rem;">Rencontres</span>
+                    <h4 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 1rem;">Jams & Spots</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.5;">Organise des sessions d'entraînement dans ta ville ou partage les coordonnées de ton nouveau spot secret.</p>
+                    <a href="#" class="btn-core btn-outline" style="width: 100%; text-align: center;">Entrer</a>
+                </div>
+            </div>
+
+            <div class="pro-card">
+                <div class="pro-card-content" style="padding: 2rem;">
+                    <span class="tag-pro border-tag" style="margin-bottom: 1rem;">Matériel</span>
+                    <h4 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 1rem;">Gear & Équipement</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.5;">Avis sur les dernières chaussures, pantalons techwear et configurations de caméras pour filmer tes runs.</p>
+                    <a href="#" class="btn-core btn-outline" style="width: 100%; text-align: center;">Entrer</a>
+                </div>
+            </div>
         </div>
     </main>
 
 <main id="compte" class="page-view">
-        <h1 class="section-title">Espace Personnel</h1>
-        <p class="subtitle">Gestion de tes transmissions logistiques et centre de contrôle de tes favoris.</p>
+        <div class="dashboard-wrapper">
+            <h1 class="section-title" style="font-size: 2.5rem; margin-bottom: 0.5rem;">Espace Personnel</h1>
+            <p class="subtitle" style="font-size: 1rem; margin-bottom: 2rem;">Connexion au réseau AlphaRun. Gère tes données et favoris.</p>
 
-        <div class="form-grid" style="grid-template-columns: 1fr 1.2fr; gap: 3rem;">
-            
-            <div style="display: flex; flex-direction: column; gap: 2rem;">
+            <div class="dashboard-grid">
                 
-                <div class="form-container" style="background: #050505; padding: 2.5rem; border: 1px solid var(--border); width: 100%;">
-                    <h3 style="font-size: 1.4rem; text-transform: uppercase; margin-bottom: 1rem;">Suivi de Transmission</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Renseigne tes identifiants pour appeler le statut de transit de ton colis.</p>
+                <div class="auth-widget" id="auth-box">
+                    <div class="auth-tabs" id="auth-tabs-container">
+                        <button id="tab-login" class="active" onclick="AuthUI.switchTab('login')">Connexion</button>
+                        <button id="tab-register" onclick="AuthUI.switchTab('register')">Créer un compte</button>
+                    </div>
                     
-                    <form onsubmit="event.preventDefault(); trackerCommande();">
-                        <div class="form-group-pro">
-                            <label>Numéro de Commande</label>
-                            <input type="text" id="order-id" placeholder="Ex: #AR-7941" required style="width: 100%;">
-                        </div>
-                        <div class="form-group-pro" style="margin-top: 1.2rem;">
-                            <label>Adresse Email de Facturation</label>
-                            <input type="email" placeholder="traceur@alpharun.com" required style="width: 100%;">
-                        </div>
-                        <button type="submit" class="btn-core" style="width: 100%; margin-top: 1.5rem;">Localiser l'équipement</button>
-                    </form>
+                    <div class="auth-body" id="form-login">
+                        <form onsubmit="event.preventDefault(); AuthManager.login();">
+                            <label>Adresse Email</label>
+                            <input type="email" id="login-email" class="auth-input" placeholder="traceur@alpharun.com" required>
+                            
+                            <label>Mot de passe</label>
+                            <input type="password" id="login-password" class="auth-input" placeholder="••••••••" required>
+                            
+                            <button type="submit" class="btn-bw">Se Connecter</button>
+                        </form>
+                    </div>
 
-                    <div id="tracking-result" style="display: none; margin-top: 2rem; padding: 1.5rem; border: 1px solid var(--border); background: #111;">
-                        <h4 style="text-transform: uppercase; margin-bottom: 0.5rem; color: #4ade80;">Statut : Colis En Transit</h4>
-                        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">Prise en charge par AliExpress Logistics valide. Transit international fluide. Arrivée estimée au centre de distribution local sous 48 à 72 heures.</p>
+                    <div class="auth-body" id="form-register" style="display: none;">
+                        <form onsubmit="event.preventDefault(); AuthManager.register();">
+                            <label>Pseudo</label>
+                            <input type="text" id="reg-pseudo" class="auth-input" placeholder="Ton blaze" required>
+                            
+                            <label>Adresse Email</label>
+                            <input type="email" id="reg-email" class="auth-input" placeholder="traceur@alpharun.com" required>
+                            
+                            <label>Mot de passe</label>
+                            <input type="password" id="reg-password" class="auth-input" placeholder="••••••••" required>
+                            
+                            <button type="submit" class="btn-bw">Rejoindre l'élite</button>
+                        </form>
+                    </div>
+
+                    <div class="auth-body" id="form-logged" style="display: none; text-align: center;">
+                        <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🔥</span>
+                        <h3 style="color: #fff; text-transform: uppercase; font-weight: 900; font-size: 1.5rem; margin-bottom: 0.5rem;" id="logged-name">Bienvenue !</h3>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem;">Ton équipement et tes favoris sont sécurisés.</p>
+                        <button onclick="AuthManager.logout()" class="btn-dark">Se déconnecter</button>
                     </div>
                 </div>
 
-                <div class="form-container" style="background: #050505; padding: 2.5rem; border: 1px solid var(--border); width: 100%;">
-                    <h3 style="font-size: 1.4rem; text-transform: uppercase; margin-bottom: 1rem;">Historique et Gestion</h3>
-                    <div style="border: 1px dashed var(--border); padding: 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
-                        Aucune transaction archivée localement sur cette session.
+                <div class="dashboard-data">
+                    
+                    <div class="panel-widget">
+                        <div class="panel-header">Suivi Logistique</div>
+                        <form class="compact-form" onsubmit="event.preventDefault(); trackerCommande();">
+                            <div class="form-group-pro">
+                                <label style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 0.5rem; display:block;">NUMÉRO DE COMMANDE</label>
+                                <input type="text" id="order-id" placeholder="#AR-7941" required style="background: #000; border: 1px solid var(--border); color: #fff; width: 100%;">
+                            </div>
+                            <button type="submit" class="btn-core" style="width: auto;">Localiser</button>
+                        </form>
+
+                        <div id="tracking-result" style="display: none; margin-top: 1.5rem; padding: 1.5rem; border: 1px solid #fff; background: #000;">
+                            <h4 style="color: #fff; font-size: 1rem; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 900;">STATUT : EN TRANSIT</h4>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;">Prise en charge logistique confirmée. Arrivée estimée au centre de distribution local sous 48h.</p>
+                        </div>
                     </div>
+
+                    <div class="panel-widget">
+                        <div class="panel-header">
+                            Mes Favoris
+                            <div class="fav-filters">
+                                <button onclick="FavorisManager.filtrerType('ALL')" id="tab-fav-ALL" class="active">TOUT</button>
+                                <button onclick="FavorisManager.filtrerType('TUTO')" id="tab-fav-TUTO">VIDÉOS</button>
+                                <button onclick="FavorisManager.filtrerType('PRODUCT')" id="tab-fav-PRODUCT">SHOP</button>
+                                <button onclick="FavorisManager.filtrerType('EVENT')" id="tab-fav-EVENT">EVENTS</button>
+                                <button onclick="FavorisManager.filtrerType('FORUM')" id="tab-fav-FORUM">FORUM</button>
+                            </div>
+                        </div>
+                        
+                        <div id="liste-favoris" style="display: flex; flex-direction: column;">
+                            </div>
+                    </div>
+
                 </div>
             </div>
-
-            <div class="form-container" style="background: #050505; padding: 2.5rem; border: 1px solid var(--border); width: 100%;">
-                <h3 style="font-size: 1.4rem; text-transform: uppercase; margin-bottom: 1.5rem;">Mes Éléments Sauvegardés</h3>
-                
-                <div style="display: flex; gap: 0.4rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.2rem; flex-wrap: wrap;">
-                    <button onclick="FavorisManager.filtrerType('ALL')" id="tab-fav-ALL" style="background: var(--text); color: var(--bg); border: none; padding: 8px 14px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; cursor: pointer; letter-spacing: 1px;">Tout</button>
-                    <button onclick="FavorisManager.filtrerType('TUTO')" id="tab-fav-TUTO" style="background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 8px 14px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; cursor: pointer; letter-spacing: 1px;">Vidéos 📺</button>
-                    <button onclick="FavorisManager.filtrerType('PRODUCT')" id="tab-fav-PRODUCT" style="background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 8px 14px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; cursor: pointer; letter-spacing: 1px;">Produits 🎒</button>
-                    <button onclick="FavorisManager.filtrerType('EVENT')" id="tab-fav-EVENT" style="background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 8px 14px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; cursor: pointer; letter-spacing: 1px;">Events 📅</button>
-                </div>
-
-                <div id="liste-favoris" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    </div>
-            </div>
-
         </div>
     </main>
 
@@ -1140,7 +1274,7 @@
 <script>
         // --- 1. ROUTEUR SPA ---
         const AlphaRouter = {
-            routes: ['#accueil', '#tutos', '#spots', '#evenements', '#shop', '#compte', '#contact', '#cgu', '#mentions-legales', '#confidentialite'],
+            routes: ['#accueil', '#tutos', '#spots', '#evenements', '#shop', '#forum', '#compte', '#contact', '#cgu', '#mentions-legales', '#confidentialite'],
             defaultRoute: '#accueil',
             init() {
                 window.addEventListener('hashchange', () => this.handleRoute());
@@ -1191,50 +1325,212 @@
             document.getElementById('tracking-result').style.display = 'block';
         }
 
-        // --- 4. GESTIONNAIRE DE FAVORIS UNIFIÉ MULTI-CATÉGORIES ---
-        const FavorisManager = {
-            currentFilter: 'ALL',
-            getFavoris() {
-                return JSON.parse(localStorage.getItem('alphaRunSystemFavs')) || [];
-            },
-            ajouter(id, type, titre, urlImage, tag, lien) {
-                let favoris = this.getFavoris();
-                if (!favoris.find(f => f.id === id)) {
-                    favoris.push({ id, type, titre, urlImage, tag, lien });
-                    localStorage.setItem('alphaRunSystemFavs', JSON.stringify(favoris));
-                    alert(`"${titre}" a été verrouillé dans ton espace personnel !`);
-                    this.afficher(); 
+        // --- 4. GESTIONNAIRE D'INTERFACE AUTHENTIFICATION ---
+        const AuthUI = {
+            switchTab(tab) {
+                document.getElementById('tab-login').classList.remove('active');
+                document.getElementById('tab-register').classList.remove('active');
+                document.getElementById('form-login').style.display = 'none';
+                document.getElementById('form-register').style.display = 'none';
+                
+                if(tab === 'login') {
+                    document.getElementById('tab-login').classList.add('active');
+                    document.getElementById('form-login').style.display = 'block';
                 } else {
-                    alert("Cet élément fait déjà partie de ton tableau de bord.");
+                    document.getElementById('tab-register').classList.add('active');
+                    document.getElementById('form-register').style.display = 'block';
+                }
+            }
+        };
+
+        // --- 5. MOTEUR DE COMPTE (CONNECTÉ À MONGODB) ---
+        const AuthManager = {
+            init() {
+                const user = JSON.parse(localStorage.getItem('alphaRunSession'));
+                if(user) {
+                    this.showLoggedState(user.nom);
+                    FavorisManager.loadFavoris(); // Charge les favoris de la BDD si on est connecté !
+                } else {
+                    FavorisManager.afficher(); // Affiche le message "Connecte-toi"
                 }
             },
-            supprimer(id) {
-                let favoris = this.getFavoris();
-                favoris = favoris.filter(f => f.id !== id); 
-                localStorage.setItem('alphaRunSystemFavs', JSON.stringify(favoris));
-                this.afficher(); 
+            async register() {
+                const nom = document.getElementById('reg-pseudo').value;
+                const email = document.getElementById('reg-email').value;
+                const password = document.getElementById('reg-password').value;
+                
+                try {
+                    const res = await fetch('https://alpharun-backend.onrender.com/api/auth/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ nom, email, password })
+                    });
+                    const data = await res.json();
+                    
+                    if(!res.ok) throw new Error(data.error);
+                    
+                    alert("AlphaRun profile successfully created! You can now log in.");
+                    AuthUI.switchTab('login');
+                } catch (err) {
+                    alert("Error: " + err.message);
+                }
             },
-            filtrerType(type) {
+            async login() {
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                try {
+                    const res = await fetch('https://alpharun-backend.onrender.com/api/auth/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+                    const data = await res.json();
+                    
+                    if(!res.ok) throw new Error(data.error);
+                    
+                    // Sauvegarde la session
+                    localStorage.setItem('alphaRunSession', JSON.stringify({ nom: data.nom, email: email }));
+                    this.showLoggedState(data.nom);
+                    
+                    // Une fois connecté, on charge automatiquement ses favoris de MongoDB
+                    FavorisManager.loadFavoris();
+                } catch (err) {
+                    alert("Error: " + err.message);
+                }
+            },
+            logout() {
+                localStorage.removeItem('alphaRunSession');
+                document.getElementById('form-logged').style.display = 'none';
+                document.getElementById('auth-tabs-container').style.display = 'flex';
+                AuthUI.switchTab('login');
+                document.getElementById('login-email').value = '';
+                document.getElementById('login-password').value = '';
+                
+                // On vide l'affichage des favoris
+                FavorisManager.loadFavoris();
+            },
+            showLoggedState(nom) {
+                document.getElementById('auth-tabs-container').style.display = 'none';
+                document.getElementById('form-login').style.display = 'none';
+                document.getElementById('form-register').style.display = 'none';
+                document.getElementById('form-logged').style.display = 'block';
+                document.getElementById('logged-name').innerText = "WELCOME, " + nom;
+            }
+        };
+
+        // --- 6. GESTIONNAIRE DE FAVORIS (CONNECTÉ À MONGODB) ---
+        const FavorisManager = {
+            currentFilter: 'ALL',
+            favorisLocaux: [],
+
+            getUserEmail() {
+                const session = JSON.parse(localStorage.getItem('alphaRunSession'));
+                return session ? session.email : null;
+            },
+
+            async loadFavoris() {
+                const email = this.getUserEmail();
+                if (!email) {
+                    this.favorisLocaux = [];
+                    this.afficher();
+                    return;
+                }
+                try {
+                    const res = await fetch(`https://alpharun-backend.onrender.com/api/favoris/${email}`);
+                    if (res.ok) {
+                        this.favorisLocaux = await res.json();
+                        this.afficher();
+                    }
+                } catch (err) {
+                    console.error("Error loading favorites:", err);
+                }
+            },
+
+            async ajouter(id, type, titre, urlImage, tag, lien) {
+                const email = this.getUserEmail();
+                if (!email) {
+                    alert("🚨 You must log in to your Personal Space to save a favorite!");
+                    window.location.hash = '#compte';
+                    return;
+                }
+
+                const nouveauFavori = { id, type, titre, urlImage, tag, lien };
+
+                try {
+                    const res = await fetch('https://alpharun-backend.onrender.com/api/favoris/add', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, favori: nouveauFavori })
+                    });
+                    const data = await res.json();
+                    
+                    if (res.ok) {
+                        this.favorisLocaux = data.favoris;
+                        this.afficher();
+                        alert(`✔️ "${titre}" has been saved to your dashboard!`);
+                    } else {
+                        alert(data.error);
+                    }
+                } catch (err) {
+                    alert("Network error while adding to server.");
+                }
+            },
+
+            async supprimer(id) {
+                const email = this.getUserEmail();
+                if (!email) return;
+
+                try {
+                    const res = await fetch('https://alpharun-backend.onrender.com/api/favoris/remove', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, idFavori: id })
+                    });
+                    const data = await res.json();
+                    
+                    if (res.ok) {
+                        this.favorisLocaux = data.favoris;
+                        this.afficher();
+                    }
+                } catch (err) {
+                    alert("Server error during deletion.");
+                }
+            },
+
+           filtrerType(type) {
                 this.currentFilter = type;
-                ['ALL', 'TUTO', 'PRODUCT', 'EVENT'].forEach(t => {
+                ['ALL', 'TUTO', 'PRODUCT', 'EVENT', 'FORUM'].forEach(t => {
                     const btn = document.getElementById(`tab-fav-${t}`);
                     if(btn) {
-                        btn.style.background = (t === type) ? 'var(--text)' : 'transparent';
-                        btn.style.color = (t === type) ? 'var(--bg)' : 'var(--text-muted)';
-                        btn.style.borderColor = (t === type) ? 'var(--text)' : 'var(--border)';
+                        if (t === type) {
+                            btn.classList.add('active');
+                            btn.style.color = '#fff';
+                            btn.style.borderColor = '#fff';
+                        } else {
+                            btn.classList.remove('active');
+                            btn.style.color = 'var(--text-muted)';
+                            btn.style.borderColor = 'var(--border)';
+                        }
                     }
                 });
                 this.afficher();
             },
+
             afficher() {
                 const container = document.getElementById('liste-favoris');
                 if (!container) return;
 
-                const allFavs = this.getFavoris();
-                const favoris = allFavs.filter(f => this.currentFilter === 'ALL' || f.type === this.currentFilter);
+                const email = this.getUserEmail();
+                if (!email) {
+                    container.innerHTML = `<p style="color: #ff3333; font-size: 0.9rem; text-align: center; padding: 2rem 0; font-weight: bold; text-transform: uppercase;">Log in to view your saved items.</p>`;
+                    return;
+                }
+
+                const favoris = this.favorisLocaux.filter(f => this.currentFilter === 'ALL' || f.type === this.currentFilter);
                 
                 if (favoris.length === 0) {
-                    container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem; font-style: italic; text-align: center; padding: 2rem 0;">Aucun élément trouvé dans cette catégorie.</p>`;
+                    container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem; font-style: italic; text-align: center; padding: 2rem 0;">No items found in this category.</p>`;
                     return;
                 }
 
@@ -1262,7 +1558,7 @@
             }
         };
 
-        // --- 5. MOTEUR DE TUTORIELS YOUTUBE (PAGINATION + LAZY LOAD) ---
+        // --- 7. MOTEUR DE TUTORIELS YOUTUBE (PAGINATION + LAZY LOAD) ---
         let allVideos = []; 
         let videosFiltres = []; 
         let indexAffichage = 0; 
@@ -1273,14 +1569,14 @@
             const grid = document.getElementById('video-grid');
             if(!grid) return;
             
-            grid.innerHTML = '<p style="color:var(--text-muted); grid-column: 1 / -1; text-align: center; font-size: 1.2rem;">Connexion au serveur... Chargement des tutos en cours...</p>';
+            grid.innerHTML = '<p style="color:var(--text-muted); grid-column: 1 / -1; text-align: center; font-size: 1.2rem;">Connecting to server... Loading tutorials...</p>';
 
             try {
                 const response = await fetch('https://alpharun-backend.onrender.com/api/videos', { cache: 'no-store' });
                 allVideos = await response.json();
                 appliquerFiltresEtRecherche(); 
             } catch (error) {
-                grid.innerHTML = '<p style="color:#ff3333; grid-column: 1 / -1; text-align: center; font-weight: 800;">Erreur de chargement des vidéos.</p>';
+                grid.innerHTML = '<p style="color:#ff3333; grid-column: 1 / -1; text-align: center; font-weight: 800;">Error loading videos.</p>';
             }
         }
 
@@ -1327,7 +1623,7 @@
             const btnLoadMore = document.getElementById('load-more-container');
 
             if (videosFiltres.length === 0 && indexAffichage === 0) {
-                grid.innerHTML = '<p style="color: #ff3333; grid-column: 1 / -1; font-size: 1.2rem; font-weight: 800; text-align: center;">Aucun tutoriel trouvé pour cette recherche.</p>';
+                grid.innerHTML = '<p style="color: #ff3333; grid-column: 1 / -1; font-size: 1.2rem; font-weight: 800; text-align: center;">No tutorials found for this search.</p>';
                 btnLoadMore.style.display = 'none';
                 return;
             }
@@ -1335,11 +1631,11 @@
             const prochainesVideos = videosFiltres.slice(indexAffichage, indexAffichage + VIDEOS_PAR_PAGE);
 
             prochainesVideos.forEach(video => {
-                let nomCat = video.categorie || 'debutant';
-                if(nomCat === "securite") nomCat = "Sécurité";
-                if(nomCat === "intermediaire") nomCat = "Intermédiaire";
-                if(nomCat === "confirme") nomCat = "Confirmé";
-                if(nomCat === "debutant") nomCat = "Débutant";
+                let nomCat = video.categorie || 'beginner';
+                if(nomCat === "securite") nomCat = "Safety";
+                if(nomCat === "intermediaire") nomCat = "Intermediate";
+                if(nomCat === "confirme") nomCat = "Advanced";
+                if(nomCat === "debutant") nomCat = "Beginner";
                 if(nomCat === "variant") nomCat = "Freerun Variant";
                 if(nomCat === "freerun") nomCat = "Freerun";
 
@@ -1356,7 +1652,7 @@
                                 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">${nomCat}</span>
                                 <h4 style="font-size: 1.1rem; font-weight: 800; text-transform: uppercase; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${video.titre}</h4>
                             </div>
-                            <button onclick="FavorisManager.ajouter('${video.id}', 'TUTO', '${safeTitre}', '${urlImage}', 'Vidéo 📺', '#tutos')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 5px 10px; font-size: 0.7rem; cursor: pointer; text-transform: uppercase; white-space: nowrap; transition: background 0.3s;" onmouseover="this.style.background='var(--text)'; this.style.color='var(--bg)'" onmouseout="this.style.background='transparent'; this.style.color='var(--text)'">
+                            <button onclick="FavorisManager.ajouter('${video.id}', 'TUTO', '${safeTitre}', '${urlImage}', 'Video 📺', '#tutos')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 5px 10px; font-size: 0.7rem; cursor: pointer; text-transform: uppercase; white-space: nowrap; transition: background 0.3s;" onmouseover="this.style.background='var(--text)'; this.style.color='var(--bg)'" onmouseout="this.style.background='transparent'; this.style.color='var(--text)'">
                                 ❤️
                             </button>
                         </div>
@@ -1375,12 +1671,12 @@
             }
         }
 
-        // --- INITIALISATION GLOBALE ---
+        // --- 8. INITIALISATION GLOBALE ---
         document.addEventListener('DOMContentLoaded', () => {
             AlphaRouter.init();
             UIController.init();
             chargerVideos(); 
-            FavorisManager.afficher(); 
+            AuthManager.init(); // <--- C'est lui qui va gérer la connexion ET charger les favoris via MongoDB
         });
 
         // --- BOUTON RETOUR EN HAUT ---
