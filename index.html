@@ -723,11 +723,31 @@
     </main>
 
   <main id="evenements" class="page-view">
-        <h1 class="section-title">Événements</h1>
-        <p class="subtitle">Le calendrier officiel des compétitions et jams mondiaux. Prépare tes trips.</p>
-        
+        <div class="forum-header" style="margin-bottom: 2rem;">
+            <div>
+                <h1 class="section-title">Événements</h1>
+                <p class="subtitle">Le calendrier officiel des compétitions et jams mondiaux. Prépare tes trips.</p>
+            </div>
+            <button id="btn-admin-event" class="btn-bw" style="display:none; background:#ff3333; color:#fff; border-color:#ff3333; width: auto; padding: 0.8rem 1.5rem;" onclick="EventsManager.toggleForm()">⚡ AJOUTER EVENT</button>
+        </div>
+
+        <div class="new-topic-form" id="admin-event-form" style="border-color: #ff3333; margin-bottom: 3rem; display:none;">
+            <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem; text-transform: uppercase; border-bottom: 1px solid #ff3333; padding-bottom: 0.5rem; color: #ff3333;">⚡ AJOUTER UN ÉVÉNEMENT</h3>
+            <form onsubmit="event.preventDefault(); EventsManager.addEvent();">
+                <div class="form-grid" style="gap: 1.5rem; margin-bottom: 1.2rem; grid-template-columns: 1fr;">
+                    <div class="form-group-pro"><label style="color:#ff3333;">Titre (ex: Red Bull Art of Motion 🇬🇷)</label><input type="text" id="ev-titre" required style="background:#000; border:1px solid #ff3333; color:#fff;"></div>
+                    <div class="form-group-pro"><label style="color:#ff3333;">Date (ex: 14.09.26)</label><input type="text" id="ev-date" required style="background:#000; border:1px solid #ff3333; color:#fff;"></div>
+                    <div class="form-group-pro"><label style="color:#ff3333;">Lieu & Description détaillée</label><textarea id="ev-desc" rows="3" required style="background:#000; border:1px solid #ff3333; color:#fff; width:100%; padding:1rem; font-family: var(--font);"></textarea></div>
+                    <div class="form-group-pro"><label style="color:#ff3333;">URL du Site / Billetterie</label><input type="url" id="ev-lien" required style="background:#000; border:1px solid #ff3333; color:#fff;"></div>
+                    <div class="form-group-pro"><label style="color:#ff3333;">URL de l'image (Pour les favoris)</label><input type="url" id="ev-image" required style="background:#000; border:1px solid #ff3333; color:#fff;"></div>
+                </div>
+                <button type="submit" class="btn-bw" style="width: 100%; background: #ff3333; color: #fff; border-color: #ff3333;">Publier l'événement</button>
+            </form>
+        </div>
+
         <div class="events-timeline">
-            
+            <div id="dynamic-events-container"></div>
+
             <div class="event-entry">
                 <div class="ev-date">14.09.26</div>
                 <div class="ev-meta">
@@ -859,15 +879,34 @@
                     <button onclick="FavorisManager.ajouter('ev-10', 'EVENT', 'WCT Global Championship', 'https://tbloxstorage.blob.core.windows.net/69323417ef30daada18a990e/6932354aef30daada18a9919.jpg', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
                 </div>
             </div>
-
         </div>
     </main>
 
-<main id="shop" class="page-view">
-        <h1 class="section-title">Équipement</h1>
-        <p class="subtitle">L'arsenal urbain AlphaRun. Conçu pour le mouvement absolu.</p>
-        
+    <main id="shop" class="page-view">
+        <div class="forum-header" style="margin-bottom: 2rem;">
+            <div>
+                <h1 class="section-title">Équipement</h1>
+                <p class="subtitle">L'arsenal urbain AlphaRun. Conçu pour le mouvement absolu.</p>
+            </div>
+            <button id="btn-admin-product" class="btn-bw" style="display:none; background:#ff3333; color:#fff; border-color:#ff3333; width: auto; padding: 0.8rem 1.5rem;" onclick="ShopManager.toggleForm()">⚡ AJOUTER PRODUIT</button>
+        </div>
+
+        <div class="new-topic-form" id="admin-product-form" style="border-color: #ff3333; margin-bottom: 3rem; display:none;">
+            <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem; text-transform: uppercase; border-bottom: 1px solid #ff3333; padding-bottom: 0.5rem; color: #ff3333;">⚡ AJOUTER UN PRODUIT</h3>
+            <form onsubmit="event.preventDefault(); ShopManager.addProduct();">
+                <div class="form-grid" style="gap: 1.5rem; margin-bottom: 1.2rem; grid-template-columns: 1fr;">
+                    <div class="form-group-pro"><label style="color:#ff3333;">Nom du produit</label><input type="text" id="prod-nom" required style="background:#000; border:1px solid #ff3333; color:#fff;"></div>
+                    <div class="form-group-pro"><label style="color:#ff3333;">Prix (ex: 34.90 €)</label><input type="text" id="prod-prix" required style="background:#000; border:1px solid #ff3333; color:#fff;"></div>
+                    <div class="form-group-pro"><label style="color:#ff3333;">URL de l'image du produit</label><input type="url" id="prod-image" required style="background:#000; border:1px solid #ff3333; color:#fff;"></div>
+                    <div class="form-group-pro"><label style="color:#ff3333;">URL de paiement direct Stripe/Boutique</label><input type="url" id="prod-lien" required style="background:#000; border:1px solid #ff3333; color:#fff;"></div>
+                </div>
+                <button type="submit" class="btn-bw" style="width: 100%; background: #ff3333; color: #fff; border-color: #ff3333;">Ajouter à la boutique</button>
+            </form>
+        </div>
+
         <div class="shop-grid">
+            <div id="dynamic-products-container" style="display: contents;"></div>
+
             <div class="product-card">
                 <div class="product-image" style="background: url('https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=800&auto=format&fit=crop') center/cover;"></div>
                 <div class="product-info">
@@ -1432,9 +1471,24 @@
             }
         };
 
-        // --- 3. TRAQUEUR DE COMMANDE ---
         function trackerCommande() {
             document.getElementById('tracking-result').style.display = 'block';
+        }
+
+        // --- 3. VÉRIFICATION ADMIN GLOBALE ---
+        function checkAdminUI() {
+            const session = JSON.parse(localStorage.getItem('alphaRunSession'));
+            const isAdmin = session && (
+                (session.email && session.email.toLowerCase() === 'alpharun33@gmail.com') ||
+                (session.nom && session.nom.toUpperCase() === 'LK10') ||
+                (session.nom && session.nom.toUpperCase() === 'ADMIN')
+            );
+
+            const btnEvent = document.getElementById('btn-admin-event');
+            const btnProduct = document.getElementById('btn-admin-product');
+            
+            if(btnEvent) btnEvent.style.display = isAdmin ? 'block' : 'none';
+            if(btnProduct) btnProduct.style.display = isAdmin ? 'block' : 'none';
         }
 
         // --- 4. GESTIONNAIRE D'INTERFACE AUTHENTIFICATION ---
@@ -1461,10 +1515,11 @@
                 const user = JSON.parse(localStorage.getItem('alphaRunSession'));
                 if(user) {
                     this.showLoggedState(user.nom);
-                    FavorisManager.loadFavoris(); // Charge les favoris de la BDD si on est connecté !
+                    FavorisManager.loadFavoris(); 
                 } else {
-                    FavorisManager.afficher(); // Affiche le message "Connecte-toi"
+                    FavorisManager.afficher(); 
                 }
+                checkAdminUI(); // Active les boutons rouges si besoin
             },
             async register() {
                 const nom = document.getElementById('reg-pseudo').value;
@@ -1501,12 +1556,11 @@
                     
                     if(!res.ok) throw new Error(data.error);
                     
-                    // Sauvegarde la session AVEC l'email pour que le mode Admin fonctionne
                     localStorage.setItem('alphaRunSession', JSON.stringify({ nom: data.nom, email: email }));
                     this.showLoggedState(data.nom);
                     
-                    // Une fois connecté, on charge automatiquement ses favoris de MongoDB
                     FavorisManager.loadFavoris();
+                    checkAdminUI(); // Active les boutons rouges instantanément
                 } catch (err) {
                     alert("Error: " + err.message);
                 }
@@ -1519,8 +1573,8 @@
                 document.getElementById('login-email').value = '';
                 document.getElementById('login-password').value = '';
                 
-                // On vide l'affichage des favoris
                 FavorisManager.loadFavoris();
+                checkAdminUI(); // Cache les boutons rouges
             },
             showLoggedState(nom) {
                 document.getElementById('auth-tabs-container').style.display = 'none';
@@ -1531,7 +1585,116 @@
             }
         };
 
-        // --- 6. GESTIONNAIRE DE FAVORIS (CONNECTÉ À MONGODB) ---
+        // --- 6. MOTEURS DYNAMIQUE (EVENTS ET SHOP) ---
+        const EventsManager = {
+            toggleForm() {
+                const form = document.getElementById('admin-event-form');
+                form.style.display = form.style.display === 'none' ? 'block' : 'none';
+            },
+            async loadEvents() {
+                const container = document.getElementById('dynamic-events-container');
+                if(!container) return;
+                try {
+                    const res = await fetch('https://alpharun-backend.onrender.com/api/events');
+                    const events = await res.json();
+                    if(events.length === 0) return; 
+                    
+                    let html = '';
+                    events.forEach(ev => {
+                        const safeTitre = ev.titre.replace(/'/g, "\\'");
+                        html += `
+                            <div class="event-entry">
+                                <div class="ev-date">${ev.date}</div>
+                                <div class="ev-meta">
+                                    <h3>${ev.titre}</h3>
+                                    <p>${ev.description}</p>
+                                </div>
+                                <div style="display: flex; gap: 1rem; align-items: center;">
+                                    <a href="${ev.lien}" target="_blank" class="btn-core">Infos</a>
+                                    <button onclick="FavorisManager.ajouter('${ev._id}', 'EVENT', '${safeTitre}', '${ev.image}', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = html;
+                } catch (e) { console.error("Erreur chargement events"); }
+            },
+            async addEvent() {
+                const titre = document.getElementById('ev-titre').value;
+                const date = document.getElementById('ev-date').value;
+                const description = document.getElementById('ev-desc').value;
+                const lien = document.getElementById('ev-lien').value;
+                const image = document.getElementById('ev-image').value;
+                try {
+                    await fetch('https://alpharun-backend.onrender.com/api/events/add', {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ titre, date, description, lien, image })
+                    });
+                    this.toggleForm();
+                    await this.loadEvents();
+                    document.getElementById('ev-titre').value = '';
+                    document.getElementById('ev-date').value = '';
+                    document.getElementById('ev-desc').value = '';
+                    document.getElementById('ev-lien').value = '';
+                    document.getElementById('ev-image').value = '';
+                } catch (e) { alert("Erreur d'ajout d'événement."); }
+            }
+        };
+
+        const ShopManager = {
+            toggleForm() {
+                const form = document.getElementById('admin-product-form');
+                form.style.display = form.style.display === 'none' ? 'block' : 'none';
+            },
+            async loadProducts() {
+                const container = document.getElementById('dynamic-products-container');
+                if(!container) return;
+                try {
+                    const res = await fetch('https://alpharun-backend.onrender.com/api/products');
+                    const prods = await res.json();
+                    if(prods.length === 0) return; 
+                    
+                    let html = '';
+                    prods.forEach(p => {
+                        const safeNom = p.nom.replace(/'/g, "\\'");
+                        html += `
+                            <div class="product-card">
+                                <div class="product-image" style="background: url('${p.image}') center/cover;"></div>
+                                <div class="product-info">
+                                    <h3 class="product-name">${p.nom}</h3>
+                                    <div class="product-price">${p.prix}</div>
+                                </div>
+                                <div style="display: flex; border-top: 1px solid var(--border);">
+                                    <a href="${p.lien}" target="_blank" class="btn-add" style="display: block; text-decoration: none; text-align: center; flex: 1; border-top: none;">Acheter ↗</a>
+                                    <button onclick="FavorisManager.ajouter('${p._id}', 'PRODUCT', '${safeNom}', '${p.image}', 'Équipement 🎒', '#shop')" class="btn-add" style="width: 60px; border-top: none; border-left: 1px solid var(--border);">❤️</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = html;
+                } catch (e) { console.error("Erreur chargement produits"); }
+            },
+            async addProduct() {
+                const nom = document.getElementById('prod-nom').value;
+                const prix = document.getElementById('prod-prix').value;
+                const image = document.getElementById('prod-image').value;
+                const lien = document.getElementById('prod-lien').value;
+                try {
+                    await fetch('https://alpharun-backend.onrender.com/api/products/add', {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ nom, prix, image, lien })
+                    });
+                    this.toggleForm();
+                    await this.loadProducts();
+                    document.getElementById('prod-nom').value = '';
+                    document.getElementById('prod-prix').value = '';
+                    document.getElementById('prod-image').value = '';
+                    document.getElementById('prod-lien').value = '';
+                } catch (e) { alert("Erreur d'ajout de produit."); }
+            }
+        };
+
+        // --- 7. GESTIONNAIRE DE FAVORIS (CONNECTÉ À MONGODB) ---
         const FavorisManager = {
             currentFilter: 'ALL',
             favorisLocaux: [],
@@ -1674,7 +1837,7 @@
             }
         };
 
-        // --- 7. MOTEUR DE TUTORIELS YOUTUBE (PAGINATION + LAZY LOAD) ---
+        // --- 8. MOTEUR DE TUTORIELS YOUTUBE ---
         let allVideos = []; 
         let videosFiltres = []; 
         let indexAffichage = 0; 
@@ -1787,7 +1950,7 @@
             }
         }
 
-        // --- 8. MOTEUR DE FORUM (CONNECTÉ À MONGODB) ---
+        // --- 9. MOTEUR DE FORUM (CONNECTÉ À MONGODB) ---
         const ForumManager = {
             currentCategory: '',
 
@@ -1798,7 +1961,6 @@
                 document.getElementById('forum-categories-view').style.display = 'none';
                 document.getElementById('forum-topics-view').style.display = 'block';
                 
-                // On cache tous les formulaires (avec sécurité si le HTML n'est pas encore à jour)
                 const newTopicForm = document.getElementById('new-topic-form');
                 const suggestionForm = document.getElementById('suggestion-form');
                 const adminForm = document.getElementById('admin-link-form');
@@ -1807,11 +1969,9 @@
                 if(suggestionForm) suggestionForm.style.display = 'none';
                 if(adminForm) adminForm.style.display = 'none';
                 
-                // VÉRIFICATION ADMIN (Passe-Droit Automatique)
                 const actionBtn = document.getElementById('btn-new-action');
                 const session = JSON.parse(localStorage.getItem('alphaRunSession'));
                 
-                // Vérification blindée de l'email admin
                 const isAdmin = session && (
                     (session.email && session.email.toLowerCase() === 'alpharun33@gmail.com') ||
                     (session.nom && session.nom.toUpperCase() === 'LK10') ||
@@ -1906,7 +2066,6 @@
                     topics.forEach(topic => {
                         const date = new Date(topic.dateCreation).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
                         
-                        // AFFICHAGE SPÉCIAL ANNUAIRE
                         if (this.currentCategory === 'Serveurs Discord' || this.currentCategory === 'Forums Externes') {
                             html += `
                                 <div class="topic-item" style="display: block; cursor: default;">
@@ -1918,7 +2077,6 @@
                                 </div>
                             `;
                         } else {
-                            // AFFICHAGE FORUM NORMAL
                             html += `
                                 <div class="topic-item" onclick="alert('La lecture des messages sera bientôt disponible !')">
                                     <div class="topic-info">
@@ -1951,7 +2109,7 @@
                 const session = JSON.parse(localStorage.getItem('alphaRunSession'));
                 if (!session) return;
                 const titre = document.getElementById('admin-link-title').value;
-                const contenu = document.getElementById('admin-link-url').value; // L'URL devient le contenu
+                const contenu = document.getElementById('admin-link-url').value; 
                 this.envoyerTopicDB(titre, contenu, session.nom);
             },
 
@@ -1966,7 +2124,6 @@
                     const data = await response.json();
 
                     if (response.ok) {
-                        // Nettoyage et rafraîchissement
                         const titleField = document.getElementById('topic-title');
                         const contentField = document.getElementById('topic-content');
                         const adminTitleField = document.getElementById('admin-link-title');
@@ -1992,12 +2149,14 @@
             }
         };
 
-        // --- 9. INITIALISATION GLOBALE ---
+        // --- 10. INITIALISATION GLOBALE ---
         document.addEventListener('DOMContentLoaded', () => {
             AlphaRouter.init();
             UIController.init();
             chargerVideos(); 
-            AuthManager.init(); // Gère la connexion et les favoris via MongoDB
+            AuthManager.init(); // Gère la connexion, les favoris ET allume les boutons admin !
+            EventsManager.loadEvents(); // Charge les événements MongoDB
+            ShopManager.loadProducts(); // Charge la boutique MongoDB
         });
 
         // --- BOUTON RETOUR EN HAUT ---
