@@ -636,13 +636,17 @@
         <p class="subtitle">Le calendrier officiel des compétitions et jams mondiaux. Prépare tes trips.</p>
         
         <div class="events-timeline">
+            
             <div class="event-entry">
                 <div class="ev-date">14.09.26</div>
                 <div class="ev-meta">
                     <h3>Red Bull Art of Motion 🇬🇷</h3>
                     <p>Santorin, Grèce. Le monument du freerunning mondial. Les meilleurs athlètes sur les célèbres toits blancs des Cyclades.</p>
                 </div>
-                <a href="https://www.redbull.com/int-en/event-series/art-of-motion" target="_blank" class="btn-core">Site Officiel</a>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="https://www.redbull.com/int-en/event-series/art-of-motion" target="_blank" class="btn-core">Site Officiel</a>
+                    <button onclick="FavorisManager.ajouter('ev-1', 'EVENT', 'Red Bull Art of Motion', 'https://images.unsplash.com/photo-1555819206-7b30da4f1506?q=80&w=200&auto=format&fit=crop', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
+                </div>
             </div>
 
             <div class="event-entry">
@@ -651,7 +655,10 @@
                     <h3>FISE World Series : Parkour 🇫🇷</h3>
                     <p>Montpellier, France. Étape majeure de la coupe du monde FIG Parkour (Speed Run & Freestyle) avec des dizaines de milliers de spectateurs.</p>
                 </div>
-                <a href="https://www.fise.fr/fr" target="_blank" class="btn-core btn-outline">Billetterie FISE</a>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="https://www.fise.fr/fr" target="_blank" class="btn-core btn-outline">Billetterie FISE</a>
+                    <button onclick="FavorisManager.ajouter('ev-2', 'EVENT', 'FISE World Series', 'https://images.unsplash.com/photo-1555819206-7b30da4f1506?q=80&w=200&auto=format&fit=crop', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
+                </div>
             </div>
 
             <div class="event-entry">
@@ -660,7 +667,10 @@
                     <h3>SPL World Finals 🇺🇸</h3>
                     <p>Tampa, Floride (USA). La finale mondiale de la Sport Parkour League. Des parcours techniques chronométrés d'une brutalité absolue.</p>
                 </div>
-                <a href="https://sportparkourleague.com/" target="_blank" class="btn-core">SPL Officiel</a>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="https://sportparkourleague.com/" target="_blank" class="btn-core">SPL Officiel</a>
+                    <button onclick="FavorisManager.ajouter('ev-3', 'EVENT', 'SPL World Finals', 'https://images.unsplash.com/photo-1555819206-7b30da4f1506?q=80&w=200&auto=format&fit=crop', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
+                </div>
             </div>
 
             <div class="event-entry">
@@ -669,7 +679,10 @@
                     <h3>FIG World Cup Tokyo 🇯🇵</h3>
                     <p>Tokyo, Japon. Le plus grand rassemblement compétitif d'Asie, organisé par la Fédération Internationale de Gymnastique (FIG).</p>
                 </div>
-                <a href="https://www.gymnastics.sport/site/events/search.php?type=sport&sport=PK" target="_blank" class="btn-core">Calendrier FIG</a>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="https://www.gymnastics.sport/site/events/search.php?type=sport&sport=PK" target="_blank" class="btn-core">Calendrier FIG</a>
+                    <button onclick="FavorisManager.ajouter('ev-4', 'EVENT', 'FIG World Cup Tokyo', 'https://images.unsplash.com/photo-1555819206-7b30da4f1506?q=80&w=200&auto=format&fit=crop', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
+                </div>
             </div>
 
             <div class="event-entry">
@@ -678,7 +691,10 @@
                     <h3>AirWipp Challenge 🇸🇪</h3>
                     <p>Stockholm, Suède. La compétition légendaire en salle de la team AirWipp, poussant les limites des tricks et des combos aériens.</p>
                 </div>
-                <a href="https://www.youtube.com/@airwipp" target="_blank" class="btn-core btn-outline">Chaîne AirWipp</a>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="https://www.youtube.com/@airwipp" target="_blank" class="btn-core btn-outline">Chaîne AirWipp</a>
+                    <button onclick="FavorisManager.ajouter('ev-5', 'EVENT', 'AirWipp Challenge', 'https://images.unsplash.com/photo-1555819206-7b30da4f1506?q=80&w=200&auto=format&fit=crop', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
+                </div>
             </div>
 
             <div class="event-entry">
@@ -687,7 +703,10 @@
                     <h3>NAPC (North American Parkour Champs) 🇨🇦</h3>
                     <p>Vancouver, Canada. Le rassemblement incontournable du continent nord-américain, organisé au mythique Origins Parkour.</p>
                 </div>
-                <a href="https://originsparkour.com/napc/" target="_blank" class="btn-core">Infos NAPC</a>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="https://originsparkour.com/napc/" target="_blank" class="btn-core">Infos NAPC</a>
+                    <button onclick="FavorisManager.ajouter('ev-6', 'EVENT', 'NAPC Canada', 'https://images.unsplash.com/photo-1555819206-7b30da4f1506?q=80&w=200&auto=format&fit=crop', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
+                </div>
             </div>
 
             <div class="event-entry">
@@ -696,7 +715,10 @@
                     <h3>FIG Parkour World Championships 🇶🇦</h3>
                     <p>Doha, Qatar. Les championnats du monde officiels. Les nations s'affrontent sur un set-up titanesque monté pour l'occasion.</p>
                 </div>
-                <a href="https://www.gymnastics.sport/site/events/search.php?type=sport&sport=PK" target="_blank" class="btn-core">Site FIG</a>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="https://www.gymnastics.sport/site/events/search.php?type=sport&sport=PK" target="_blank" class="btn-core">Site FIG</a>
+                    <button onclick="FavorisManager.ajouter('ev-7', 'EVENT', 'World Championships', 'https://images.unsplash.com/photo-1555819206-7b30da4f1506?q=80&w=200&auto=format&fit=crop', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
+                </div>
             </div>
 
             <div class="event-entry">
@@ -705,7 +727,10 @@
                     <h3>La Nuit du Parkour (NDK) 🇫🇷</h3>
                     <p>Nantes, France. L'un des plus gros rassemblements indoor de France. Des centaines de traceurs, des ateliers, et une grosse ambiance nocturne.</p>
                 </div>
-                <a href="https://fedeparkour.fr/" target="_blank" class="btn-core btn-outline">Fédération Française</a>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="https://fedeparkour.fr/" target="_blank" class="btn-core btn-outline">Fédération Française</a>
+                    <button onclick="FavorisManager.ajouter('ev-8', 'EVENT', 'La Nuit du Parkour', 'https://images.unsplash.com/photo-1555819206-7b30da4f1506?q=80&w=200&auto=format&fit=crop', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
+                </div>
             </div>
 
             <div class="event-entry">
@@ -714,7 +739,10 @@
                     <h3>Parkour Generations - Rendezvous 🇬🇧</h3>
                     <p>Londres, Royaume-Uni. Le plus ancien rassemblement international annuel. Des workshops et du pur mouvement dans les rues londoniennes.</p>
                 </div>
-                <a href="https://parkourgenerations.com/" target="_blank" class="btn-core">PKGen Officiel</a>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="https://parkourgenerations.com/" target="_blank" class="btn-core">PKGen Officiel</a>
+                    <button onclick="FavorisManager.ajouter('ev-9', 'EVENT', 'Rendezvous PKGen', 'https://images.unsplash.com/photo-1555819206-7b30da4f1506?q=80&w=200&auto=format&fit=crop', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
+                </div>
             </div>
 
             <div class="event-entry">
@@ -723,7 +751,10 @@
                     <h3>World Chase Tag - Global Championship 🇺🇸</h3>
                     <p>Los Angeles, Californie (USA). Le championnat du monde du jeu du chat et de la souris professionnel. Des courses-poursuites d'une intensité folle sur le mythique Quad.</p>
                 </div>
-                <a href="https://www.worldchasetag.com/" target="_blank" class="btn-core">World Chase Tag</a>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="https://www.worldchasetag.com/" target="_blank" class="btn-core">World Chase Tag</a>
+                    <button onclick="FavorisManager.ajouter('ev-10', 'EVENT', 'WCT Global Championship', 'https://images.unsplash.com/photo-1555819206-7b30da4f1506?q=80&w=200&auto=format&fit=crop', 'Événement 📅', '#evenements')" class="btn-core btn-outline" style="padding: 1.2rem; cursor: pointer;">❤️</button>
+                </div>
             </div>
 
         </div>
@@ -740,7 +771,10 @@
                     <h3 class="product-name">Chest Rig Tactique "Urbex"</h3>
                     <div class="product-price">34.90 €</div>
                 </div>
-                <a href="https://shop.alpha-run.com/produit/chest-rig" target="_blank" class="btn-add" style="display: block; text-decoration: none; text-align: center;">VOIR SUR LA BOUTIQUE</a>
+                <div style="display: flex; border-top: 1px solid var(--border);">
+                    <a href="https://shop.alpha-run.com/produit/chest-rig" target="_blank" class="btn-add" style="display: block; text-decoration: none; text-align: center; flex: 1; border-top: none;">Acheter ↗</a>
+                    <button onclick="FavorisManager.ajouter('prod-1', 'PRODUCT', 'Chest Rig Tactique', 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=800&auto=format&fit=crop', 'Équipement 🎒', '#shop')" class="btn-add" style="width: 60px; border-top: none; border-left: 1px solid var(--border);">❤️</button>
+                </div>
             </div>
 
             <div class="product-card">
@@ -749,7 +783,10 @@
                     <h3 class="product-name">Pantalon Techwear Multi-Poches</h3>
                     <div class="product-price">49.90 €</div>
                 </div>
-                <a href="https://shop.alpha-run.com/produit/pantalon-techwear" target="_blank" class="btn-add" style="display: block; text-decoration: none; text-align: center;">VOIR SUR LA BOUTIQUE</a>
+                <div style="display: flex; border-top: 1px solid var(--border);">
+                    <a href="https://shop.alpha-run.com/produit/pantalon-techwear" target="_blank" class="btn-add" style="display: block; text-decoration: none; text-align: center; flex: 1; border-top: none;">Acheter ↗</a>
+                    <button onclick="FavorisManager.ajouter('prod-2', 'PRODUCT', 'Pantalon Techwear', 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=800&auto=format&fit=crop', 'Équipement 🎒', '#shop')" class="btn-add" style="width: 60px; border-top: none; border-left: 1px solid var(--border);">❤️</button>
+                </div>
             </div>
 
             <div class="product-card">
@@ -758,12 +795,11 @@
                     <h3 class="product-name">Sacoche Crossbody Stealth</h3>
                     <div class="product-price">24.90 €</div>
                 </div>
-                <a href="https://shop.alpha-run.com/produit/sacoche" target="_blank" class="btn-add" style="display: block; text-decoration: none; text-align: center;">VOIR SUR LA BOUTIQUE</a>
+                <div style="display: flex; border-top: 1px solid var(--border);">
+                    <a href="https://shop.alpha-run.com/produit/sacoche" target="_blank" class="btn-add" style="display: block; text-decoration: none; text-align: center; flex: 1; border-top: none;">Acheter ↗</a>
+                    <button onclick="FavorisManager.ajouter('prod-3', 'PRODUCT', 'Sacoche Crossbody', 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=800&auto=format&fit=crop', 'Équipement 🎒', '#shop')" class="btn-add" style="width: 60px; border-top: none; border-left: 1px solid var(--border);">❤️</button>
+                </div>
             </div>
-        </div>
-        
-        <div style="text-align: center; margin-top: 4rem;">
-            <a href="https://shop.alpha-run.com" target="_blank" class="btn-core">ACCÉDER À TOUTE LA BOUTIQUE ↗</a>
         </div>
     </main>
 
@@ -785,56 +821,57 @@
     </main>
 
 <main id="compte" class="page-view">
-        <div class="contact-header">
-            <h1 class="section-title">Quartier Général</h1>
-            <p class="subtitle">Ton espace personnel AlphaRun. Suis ton matos et retrouve tes favoris.</p>
-        </div>
+        <h1 class="section-title">Espace Personnel</h1>
+        <p class="subtitle">Gestion de tes transmissions logistiques et centre de contrôle de tes favoris.</p>
 
-        <div class="form-grid">
+        <div class="form-grid" style="grid-template-columns: 1fr 1.2fr; gap: 3rem;">
+            
             <div style="display: flex; flex-direction: column; gap: 2rem;">
                 
-                <div class="form-container" style="background: #050505; padding: 3rem; border: 1px solid var(--border);">
-                    <h3 style="font-size: 1.5rem; text-transform: uppercase; margin-bottom: 1rem;">Suivi Logistique</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Localise ton équipement en temps réel via notre partenaire d'expédition.</p>
+                <div class="form-container" style="background: #050505; padding: 2.5rem; border: 1px solid var(--border); width: 100%;">
+                    <h3 style="font-size: 1.4rem; text-transform: uppercase; margin-bottom: 1rem;">Suivi de Transmission</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Renseigne tes identifiants pour appeler le statut de transit de ton colis.</p>
                     
                     <form onsubmit="event.preventDefault(); trackerCommande();">
                         <div class="form-group-pro">
-                            <label>Numéro de Commande (ex: #AR-9021)</label>
-                            <input type="text" id="order-id" required style="text-transform: uppercase; width: 100%;">
+                            <label>Numéro de Commande</label>
+                            <input type="text" id="order-id" placeholder="Ex: #AR-7941" required style="width: 100%;">
                         </div>
-                        <div class="form-group-pro" style="margin-top: 1.5rem;">
-                            <label>Email de facturation</label>
-                            <input type="email" required style="width: 100%;">
+                        <div class="form-group-pro" style="margin-top: 1.2rem;">
+                            <label>Adresse Email de Facturation</label>
+                            <input type="email" placeholder="traceur@alpharun.com" required style="width: 100%;">
                         </div>
-                        <button type="submit" class="btn-core" style="width: 100%; margin-top: 1.5rem;">Localiser le colis</button>
+                        <button type="submit" class="btn-core" style="width: 100%; margin-top: 1.5rem;">Localiser l'équipement</button>
                     </form>
 
-                    <div id="tracking-result" style="display: none; margin-top: 2rem; padding: 1.5rem; border: 1px solid var(--text); background: #111;">
-                        <h4 style="text-transform: uppercase; margin-bottom: 0.5rem; color: #4ade80;">Statut : En transit</h4>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">Prise en charge par AliExpress Logistics. Arrivée estimée dans le centre de tri local d'ici 48h.</p>
+                    <div id="tracking-result" style="display: none; margin-top: 2rem; padding: 1.5rem; border: 1px solid var(--border); background: #111;">
+                        <h4 style="text-transform: uppercase; margin-bottom: 0.5rem; color: #4ade80;">Statut : Colis En Transit</h4>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">Prise en charge par AliExpress Logistics valide. Transit international fluide. Arrivée estimée au centre de distribution local sous 48 à 72 heures.</p>
                     </div>
                 </div>
 
-                <div class="form-container" style="background: #050505; padding: 3rem; border: 1px solid var(--border);">
-                    <h3 style="font-size: 1.5rem; text-transform: uppercase; margin-bottom: 1rem;">Mon Profil Boutique</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Gère tes adresses de livraison, tes moyens de paiement et ton historique d'achat de manière 100% sécurisée (Cryptage SSL).</p>
-                    <a href="https://shop.alpha-run.com/mon-compte" target="_blank" class="btn-core btn-outline" style="text-align: center; width: 100%; display: block;">GÉRER MES INFORMATIONS BANCAIRES ↗</a>
+                <div class="form-container" style="background: #050505; padding: 2.5rem; border: 1px solid var(--border); width: 100%;">
+                    <h3 style="font-size: 1.4rem; text-transform: uppercase; margin-bottom: 1rem;">Historique et Gestion</h3>
+                    <div style="border: 1px dashed var(--border); padding: 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+                        Aucune transaction archivée localement sur cette session.
+                    </div>
                 </div>
             </div>
 
-            <div class="form-container" style="background: #050505; padding: 3rem; border: 1px solid var(--border);">
-                <h3 style="font-size: 1.5rem; text-transform: uppercase; margin-bottom: 1rem;">Mes Favoris</h3>
-                <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;">Retrouve ici les tutos et spots que tu as mis de côté.</p>
+            <div class="form-container" style="background: #050505; padding: 2.5rem; border: 1px solid var(--border); width: 100%;">
+                <h3 style="font-size: 1.4rem; text-transform: uppercase; margin-bottom: 1.5rem;">Mes Éléments Sauvegardés</h3>
                 
-                <div id="liste-favoris" style="display: flex; flex-direction: column; gap: 1rem;">
-                    </div>
-
-                <div style="margin-top: 1rem; padding: 1rem; background: #111; border: 1px dashed var(--text-muted); text-align: center;">
-                    <p style="color: var(--text-muted); font-size: 0.85rem; font-style: italic;">
-                        Pour ajouter un nouveau tuto ici, clique sur le bouton "+ Favori" sous la vidéo.
-                    </p>
+                <div style="display: flex; gap: 0.4rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.2rem; flex-wrap: wrap;">
+                    <button onclick="FavorisManager.filtrerType('ALL')" id="tab-fav-ALL" style="background: var(--text); color: var(--bg); border: none; padding: 8px 14px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; cursor: pointer; letter-spacing: 1px;">Tout</button>
+                    <button onclick="FavorisManager.filtrerType('TUTO')" id="tab-fav-TUTO" style="background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 8px 14px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; cursor: pointer; letter-spacing: 1px;">Vidéos 📺</button>
+                    <button onclick="FavorisManager.filtrerType('PRODUCT')" id="tab-fav-PRODUCT" style="background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 8px 14px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; cursor: pointer; letter-spacing: 1px;">Produits 🎒</button>
+                    <button onclick="FavorisManager.filtrerType('EVENT')" id="tab-fav-EVENT" style="background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 8px 14px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; cursor: pointer; letter-spacing: 1px;">Events 📅</button>
                 </div>
+
+                <div id="liste-favoris" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    </div>
             </div>
+
         </div>
     </main>
 
@@ -1142,52 +1179,70 @@
             document.getElementById('tracking-result').style.display = 'block';
         }
 
-        // --- 4. MOTEUR DE FAVORIS (LOCALSTORAGE) ---
+        // --- 4. GESTIONNAIRE DE FAVORIS UNIFIÉ MULTI-CATÉGORIES ---
         const FavorisManager = {
+            currentFilter: 'ALL',
             getFavoris() {
-                return JSON.parse(localStorage.getItem('alphaRunFavoris')) || [];
+                return JSON.parse(localStorage.getItem('alphaRunSystemFavs')) || [];
             },
             ajouter(id, type, titre, urlImage, tag, lien) {
                 let favoris = this.getFavoris();
                 if (!favoris.find(f => f.id === id)) {
                     favoris.push({ id, type, titre, urlImage, tag, lien });
-                    localStorage.setItem('alphaRunFavoris', JSON.stringify(favoris));
-                    alert(titre + " a été ajouté à ton QG !");
+                    localStorage.setItem('alphaRunSystemFavs', JSON.stringify(favoris));
+                    alert(`"${titre}" a été verrouillé dans ton espace personnel !`);
                     this.afficher(); 
                 } else {
-                    alert("Ce tuto est déjà dans tes favoris !");
+                    alert("Cet élément fait déjà partie de ton tableau de bord.");
                 }
             },
             supprimer(id) {
                 let favoris = this.getFavoris();
                 favoris = favoris.filter(f => f.id !== id); 
-                localStorage.setItem('alphaRunFavoris', JSON.stringify(favoris));
+                localStorage.setItem('alphaRunSystemFavs', JSON.stringify(favoris));
                 this.afficher(); 
+            },
+            filtrerType(type) {
+                this.currentFilter = type;
+                ['ALL', 'TUTO', 'PRODUCT', 'EVENT'].forEach(t => {
+                    const btn = document.getElementById(`tab-fav-${t}`);
+                    if(btn) {
+                        btn.style.background = (t === type) ? 'var(--text)' : 'transparent';
+                        btn.style.color = (t === type) ? 'var(--bg)' : 'var(--text-muted)';
+                        btn.style.borderColor = (t === type) ? 'var(--text)' : 'var(--border)';
+                    }
+                });
+                this.afficher();
             },
             afficher() {
                 const container = document.getElementById('liste-favoris');
                 if (!container) return;
 
-                const favoris = this.getFavoris();
+                const allFavs = this.getFavoris();
+                const favoris = allFavs.filter(f => this.currentFilter === 'ALL' || f.type === this.currentFilter);
                 
                 if (favoris.length === 0) {
-                    container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem;">Tu n'as pas encore de favoris sauvegardés. Va dans la section Tutos pour en ajouter !</p>`;
+                    container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem; font-style: italic; text-align: center; padding: 2rem 0;">Aucun élément trouvé dans cette catégorie.</p>`;
                     return;
                 }
 
                 let html = '';
                 favoris.forEach(f => {
-                    let tagColor = f.type === 'TUTO' ? '#FF9800' : 'var(--text-muted)';
+                    let colorCode = 'var(--text-muted)';
+                    if(f.type === 'TUTO') colorCode = '#FF9800';
+                    if(f.type === 'PRODUCT') colorCode = '#4ade80';
+                    if(f.type === 'EVENT') colorCode = '#00E5FF';
+
                     html += `
-                    <div style="display: flex; gap: 1rem; align-items: center; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);">
-                        <div style="width: 80px; height: 60px; background: url('${f.urlImage}') center/cover; border: 1px solid var(--border);"></div>
+                    <div style="display: flex; gap: 1rem; align-items: center; padding-bottom: 1.2rem; border-bottom: 1px solid var(--border);">
+                        <div style="width: 70px; height: 50px; background: url('${f.urlImage}') center/cover; border: 1px solid var(--border); flex-shrink: 0;"></div>
                         <div style="flex: 1; overflow: hidden;">
-                            <span style="font-size: 0.65rem; color: ${tagColor}; font-weight: 900; text-transform: uppercase;">${f.tag}</span>
-                            <h4 style="font-size: 1rem; text-transform: uppercase; margin-top: 0.2rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${f.titre}</h4>
+                            <span style="font-size: 0.6rem; color: ${colorCode}; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;">${f.tag}</span>
+                            <h4 style="font-size: 0.95rem; text-transform: uppercase; margin-top: 0.1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text);">${f.titre}</h4>
                         </div>
                         <div style="display: flex; gap: 1rem; align-items: center;">
-                            <span onclick="FavorisManager.supprimer('${f.id}')" style="color: #ff3333; cursor: pointer; font-size: 1.2rem; text-transform: uppercase; font-weight: bold; padding: 0 10px;">×</span>
-                            <a href="${f.lien}" style="color: var(--text); font-size: 1.5rem; text-decoration: none; font-weight: bold;">→</a>
+                            <span onclick="FavorisManager.supprimer('${f.id}')" style="color: #ff3333; cursor: pointer; font-size: 1.3rem; font-weight: bold; padding: 0 5px;">×</span>
+                            <a href="${f.lien}" style="color: var(--text); font-size: 1.2rem; text-decoration: none; font-weight: bold;">→</a>
                         </div>
                     </div>`;
                 });
@@ -1276,7 +1331,6 @@
                 if(nomCat === "variant") nomCat = "Freerun Variant";
                 if(nomCat === "freerun") nomCat = "Freerun";
 
-                // Sécurisation du titre pour éviter que les apostrophes ne cassent le bouton
                 const safeTitre = (video.titre || '').replace(/'/g, "\\'");
                 const urlImage = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
 
@@ -1290,8 +1344,8 @@
                                 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">${nomCat}</span>
                                 <h4 style="font-size: 1.1rem; font-weight: 800; text-transform: uppercase; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${video.titre}</h4>
                             </div>
-                            <button onclick="FavorisManager.ajouter('${video.id}', 'TUTO', '${safeTitre}', '${urlImage}', '${nomCat}', '#tutos')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 5px 10px; font-size: 0.7rem; cursor: pointer; text-transform: uppercase; white-space: nowrap; transition: background 0.3s;" onmouseover="this.style.background='var(--text)'; this.style.color='var(--bg)'" onmouseout="this.style.background='transparent'; this.style.color='var(--text)'">
-                                + Favori
+                            <button onclick="FavorisManager.ajouter('${video.id}', 'TUTO', '${safeTitre}', '${urlImage}', 'Vidéo 📺', '#tutos')" style="background: transparent; border: 1px solid var(--border); color: var(--text); padding: 5px 10px; font-size: 0.7rem; cursor: pointer; text-transform: uppercase; white-space: nowrap; transition: background 0.3s;" onmouseover="this.style.background='var(--text)'; this.style.color='var(--bg)'" onmouseout="this.style.background='transparent'; this.style.color='var(--text)'">
+                                ❤️
                             </button>
                         </div>
                     </div>
@@ -1309,17 +1363,16 @@
             }
         }
 
-       // --- INITIALISATION GLOBALE ---
+        // --- INITIALISATION GLOBALE ---
         document.addEventListener('DOMContentLoaded', () => {
             AlphaRouter.init();
             UIController.init();
             chargerVideos(); 
-            FavorisManager.afficher(); // Lancement de l'affichage des favoris au démarrage
+            FavorisManager.afficher(); 
         });
 
         // --- BOUTON RETOUR EN HAUT ---
         const scrollTopBtn = document.getElementById("scrollTopBtn");
-
         window.addEventListener("scroll", () => {
             if (window.scrollY > 300) {
                 scrollTopBtn.classList.add("visible");
@@ -1327,12 +1380,8 @@
                 scrollTopBtn.classList.remove("visible");
             }
         });
-
         scrollTopBtn.addEventListener("click", () => {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
 </body>
