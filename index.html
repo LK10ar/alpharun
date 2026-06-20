@@ -983,7 +983,7 @@
             </div>
         </div>
 
-     <div id="forum-topics-view" style="display: none;">
+        <div id="forum-topics-view" style="display: none;">
             <button class="btn-back" onclick="ForumManager.showCategories()">
                 <span>←</span> RETOUR AUX CATÉGORIES
             </button>
@@ -1035,15 +1035,14 @@
                         <input type="text" id="admin-link-title" placeholder="Ex: Parkour Union France" required style="background:#000; border:1px solid #ff3333; color:#fff;">
                     </div>
                     <div class="form-group-pro" style="margin-top: 1.2rem;">
-                        <label style="color: #ff3333;">Lien URL direct</label>
-                        <input type="url" id="admin-link-url" placeholder="https://discord.gg/..." required style="background:#000; border:1px solid #ff3333; color:#fff; width:100%; padding:1rem;">
+                        <label style="color: #ff3333;">Lien URL direct (Contenu)</label>
+                        <input type="url" id="admin-link-url" placeholder="https://discord.gg/..." required style="background:#000; border:1px solid #ff3333; color:#fff;">
                     </div>
-                    <button type="submit" class="btn-bw" style="margin-top: 1.5rem; width: 100%; background: #ff3333; color: #fff; border-color: #ff3333;">Publier dans l'annuaire (MongoDB)</button>
+                    <button type="submit" class="btn-bw" style="margin-top: 1.5rem; width: 100%; background: #ff3333; color: #fff; border-color: #ff3333;">Enregistrer directement sur MongoDB</button>
                 </form>
             </div>
 
             <div class="topic-list" id="topic-list-container" style="margin-top: 1.5rem;"></div>
-        </div>
         </div>
     </main>
 
@@ -1502,7 +1501,7 @@
                     
                     if(!res.ok) throw new Error(data.error);
                     
-                    // Sauvegarde la session
+                    // Sauvegarde la session AVEC l'email pour que le mode Admin fonctionne
                     localStorage.setItem('alphaRunSession', JSON.stringify({ nom: data.nom, email: email }));
                     this.showLoggedState(data.nom);
                     
@@ -1579,16 +1578,13 @@
                     const data = await res.json();
                     
                     if (res.ok) {
-                        // Succès
                         this.favorisLocaux = data.favoris;
                         this.afficher();
                         alert(`✔️ "${titre}" has been saved to your dashboard!`);
                     } else if (res.status === 400) {
-                        // Doublon intercepté (pas d'erreur effrayante)
                         console.warn("Info: " + data.error);
                         alert(`ℹ️ "${titre}" is already in your favorites!`);
                     } else {
-                        // Vraie erreur serveur
                         alert("Error: " + (data.error || "Server issue"));
                     }
                 } catch (err) {
@@ -1791,7 +1787,7 @@
             }
         }
 
-      // --- 8. MOTEUR DE FORUM (CONNECTÉ À MONGODB) ---
+        // --- 8. MOTEUR DE FORUM (CONNECTÉ À MONGODB) ---
         const ForumManager = {
             currentCategory: '',
 
@@ -1802,15 +1798,25 @@
                 document.getElementById('forum-categories-view').style.display = 'none';
                 document.getElementById('forum-topics-view').style.display = 'block';
                 
-                // On cache tous les formulaires
-                document.getElementById('new-topic-form').style.display = 'none';
-                document.getElementById('suggestion-form').style.display = 'none';
-                document.getElementById('admin-link-form').style.display = 'none';
+                // On cache tous les formulaires (avec sécurité si le HTML n'est pas encore à jour)
+                const newTopicForm = document.getElementById('new-topic-form');
+                const suggestionForm = document.getElementById('suggestion-form');
+                const adminForm = document.getElementById('admin-link-form');
+                
+                if(newTopicForm) newTopicForm.style.display = 'none';
+                if(suggestionForm) suggestionForm.style.display = 'none';
+                if(adminForm) adminForm.style.display = 'none';
                 
                 // VÉRIFICATION ADMIN (Passe-Droit Automatique)
                 const actionBtn = document.getElementById('btn-new-action');
                 const session = JSON.parse(localStorage.getItem('alphaRunSession'));
-                const isAdmin = session && (session.nom.toUpperCase() === 'LK10' || session.nom.toUpperCase() === 'ADMIN' || session.email === 'alpharun33@gmail.com');
+                
+                // Vérification blindée de l'email admin
+                const isAdmin = session && (
+                    (session.email && session.email.toLowerCase() === 'alpharun33@gmail.com') ||
+                    (session.nom && session.nom.toUpperCase() === 'LK10') ||
+                    (session.nom && session.nom.toUpperCase() === 'ADMIN')
+                );
 
                 if (categoryName === 'Serveurs Discord' || categoryName === 'Forums Externes') {
                     if (isAdmin) {
@@ -1851,23 +1857,32 @@
                     return;
                 }
                 const form = document.getElementById('new-topic-form');
-                form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
-                document.getElementById('suggestion-form').style.display = 'none';
-                document.getElementById('admin-link-form').style.display = 'none';
+                if(form) form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
+                
+                const suggestionForm = document.getElementById('suggestion-form');
+                const adminForm = document.getElementById('admin-link-form');
+                if(suggestionForm) suggestionForm.style.display = 'none';
+                if(adminForm) adminForm.style.display = 'none';
             },
 
             toggleSuggestionForm() {
                 const form = document.getElementById('suggestion-form');
-                form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
-                document.getElementById('new-topic-form').style.display = 'none';
-                document.getElementById('admin-link-form').style.display = 'none';
+                if(form) form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
+                
+                const newTopicForm = document.getElementById('new-topic-form');
+                const adminForm = document.getElementById('admin-link-form');
+                if(newTopicForm) newTopicForm.style.display = 'none';
+                if(adminForm) adminForm.style.display = 'none';
             },
 
             toggleAdminLinkForm() {
                 const form = document.getElementById('admin-link-form');
-                form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
-                document.getElementById('new-topic-form').style.display = 'none';
-                document.getElementById('suggestion-form').style.display = 'none';
+                if(form) form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
+                
+                const newTopicForm = document.getElementById('new-topic-form');
+                const suggestionForm = document.getElementById('suggestion-form');
+                if(newTopicForm) newTopicForm.style.display = 'none';
+                if(suggestionForm) suggestionForm.style.display = 'none';
             },
 
             async loadTopics() {
@@ -1952,12 +1967,20 @@
 
                     if (response.ok) {
                         // Nettoyage et rafraîchissement
-                        document.getElementById('topic-title').value = '';
-                        document.getElementById('topic-content').value = '';
-                        document.getElementById('admin-link-title').value = '';
-                        document.getElementById('admin-link-url').value = '';
-                        document.getElementById('new-topic-form').style.display = 'none';
-                        document.getElementById('admin-link-form').style.display = 'none';
+                        const titleField = document.getElementById('topic-title');
+                        const contentField = document.getElementById('topic-content');
+                        const adminTitleField = document.getElementById('admin-link-title');
+                        const adminUrlField = document.getElementById('admin-link-url');
+                        
+                        if(titleField) titleField.value = '';
+                        if(contentField) contentField.value = '';
+                        if(adminTitleField) adminTitleField.value = '';
+                        if(adminUrlField) adminUrlField.value = '';
+                        
+                        const newTopicForm = document.getElementById('new-topic-form');
+                        const adminForm = document.getElementById('admin-link-form');
+                        if(newTopicForm) newTopicForm.style.display = 'none';
+                        if(adminForm) adminForm.style.display = 'none';
                         
                         await this.loadTopics();
                     } else {
@@ -1968,6 +1991,7 @@
                 }
             }
         };
+
         // --- 9. INITIALISATION GLOBALE ---
         document.addEventListener('DOMContentLoaded', () => {
             AlphaRouter.init();
